@@ -1,46 +1,44 @@
 #mainContainer
 {
-	width:400px;
-	height: 550px;
-	background-color: #c3c3c324;
-	border-radius: 50px;
-	margin-left: 40%;
+	width: 142px;
+	height: 215px;
+	border-radius: 35px;
+	margin-left: 46%;
 	margin-top: 10%;
 	border-style: solid;
-	border-color: cadetblue;
+	border-color: #334142;
 }
         
 #Braille-container
 {
-	width: 252px;
-	height: 350px;
-	margin-left: 80px;
-	margin-top: 40px;
+	width: 140px;
+	height: 210px;
+	margin-left: 1%;
+	margin-top: 1%;
 	/* top: 60px; */
 }
 .Braille-dot
 {
-	background-color: #9e9e9e52;
-	height:100px;
-	width: 100px;
+	background-color: #ffffff;
+	height: 50px;
+	width: 50px;
 	border-radius: 360px;
 	float:left;
-	margin: 10px;
+	margin: 7px;
 	border-style: solid;
 } 
 
 #textOutput
 {
-
-height: 15%;
-
-width: 74%;
-
-//background-color: green;
-
-margin-top: 50px;
-
-margin-left: 13%;
+	border-style: solid;
+    height: 10%;
+    width: 50%;
+    background-color: green;
+    margin-top: 50px;
+    margin-left: 25%;
+    text-align: center;
 
 /* bottom: 10px; */
 }
+#textOutput h1
+{

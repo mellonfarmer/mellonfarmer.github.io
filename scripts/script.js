@@ -43,7 +43,7 @@ function dotClick(dotNumber)
 		}
 		function updateText(){
 		//$("#lblOutput").text(getSelectedDots())
-			if (activeDots[2] == false) {
+			if (activeDots[2] == false && activeDots[5] == false) {
 			//a
 				if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == false && activeDots[4] == false)
 				{
@@ -98,7 +98,7 @@ function dotClick(dotNumber)
 				else{
 					$("#lblOutput").text("");
 				}
-			} else if (activeDots[2] == true){
+			} else if (activeDots[2] == true && activeDots[5] == false){
 				//k
 				if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == false && activeDots[4] == false)
 				{
@@ -151,9 +151,51 @@ function dotClick(dotNumber)
 					console.log("t")
 				}else
 				{
-
 					$("#lblOutput").text("");
-				}	
+				}
+				
+					
+			}else if (activeDots[2] == true && activeDots[5] == true){
+
+				if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == false && activeDots[4] == false)
+				{
+					$("#lblOutput").text("u");
+				}
+				//l
+				else if (activeDots[0] == true && activeDots[1] == true && activeDots[3] == false && activeDots[4] == false)
+				{
+					$("#lblOutput").text("v");
+					//console.log("b on")
+				}//m 
+				else if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == true	&& activeDots[4] == false)
+				{
+					$("#lblOutput").text("x");
+					//console.log("b on")
+				}//n
+				else if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == true	&& activeDots[4] == true)
+				{
+					$("#lblOutput").text("y");
+					//console.log("b on")
+				}//o
+				else if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == false	&& activeDots[4] == true)
+				{
+					$("#lblOutput").text("z");
+					//console.log("b on")
+				}else 
+				{
+					$("#lblOutput").text("");
+				}
+			}
+			else if (activeDots[2] == false && activeDots[5] == true){
+				
+				if (activeDots[0] == false && activeDots[1] == true && activeDots[3] == true && activeDots[4] == true)
+				{
+					$("#lblOutput").text("w");
+				}
+				else 
+				{
+					$("#lblOutput").text("");
+				}
 			}
 		}
 		updateText();

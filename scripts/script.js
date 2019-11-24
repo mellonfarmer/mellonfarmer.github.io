@@ -6,6 +6,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 
 var activeDots =[false,false,false,false,false,false];
+var activeTiles = [];
 function dotClick(dotNumber)
 {
 		//take dot number
@@ -32,15 +33,7 @@ function dotClick(dotNumber)
 		//need to know which are true
 
 		//rewrite
-		function getSelectedDots(){
-			var entries=[]
-			for (var i = 0; i >= activeDots.length; i++) {
-				if (activeDots[i] == true){
-					entries.push(i);
-				}
-				return entries
-			}
-		}
+		
 		function updateText(){
 		//$("#lblOutput").text(getSelectedDots())
 			if (activeDots[2] == false && activeDots[5] == false) {
@@ -200,10 +193,105 @@ function dotClick(dotNumber)
 		}
 		updateText();
 }
+class tile{
+	//give id
+	constructor(){
+		this.activeDots = [false,false,false,false,false,false];
+		this.tileId = activeTiles.length;
+		this.drawTile();
+	}
+	//tileId = activeTiles.length;
+	//activeDots = [false,false,false,false,false,false];
+	getTileId()
+	{
+		return this.tileId;
+	}
+	drawTile()
+	    {//activeTiles[this.tileId].setDots(1);
+	    	$("#mainContainer").append("<div class=\"Braille-container\">\
+	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-1\" onclick=\"activeTiles["+this.tileId+"].setDots(1)\"></div>\
+	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-4\" onclick=\"activeTiles["+this.tileId+"].setDots(4)\"></div>\
+	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-2\" onclick=\"activeTiles["+this.tileId+"].setDots(2)\"></div>\
+	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-5\" onclick=\"activeTiles["+this.tileId+"].setDots(5)\"></div>\
+	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-3\" onclick=\"activeTiles["+this.tileId+"].setDots(3)\"></div>\
+	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-6\" onclick=\"activeTiles["+this.tileId+"].setDots(6)\"></div>"
+	    	);
+	    }
+
+	getactiveDots(dotId)
+		{
+			return this.activeDots[dotId];
+		}
+
+	setDots(dotID)
+		{
+			//let fullPath = ("#Braille-dot-id-" + this.tileid + "-"+ dotID);
+
+			if($("#Braille-dot-id-" + this.tileId + "-"+ dotID).css("background-color") == 'rgb(255, 255, 255)'){
+			$("#Braille-dot-id-" + this.tileId + "-"+ dotID).css("background-color","rgb(0, 0, 0)");
+			this.activeDots[(dotID-1)] = true;
+			console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
+			console.log("ON");
+
+		} 
+			else if($("#Braille-dot-id-" + this.tileId + "-"+ dotID).css("background-color") == 'rgb(0, 0, 0)'){
+			$("#Braille-dot-id-" + this.tileId + "-"+ dotID).css("background-color","rgb(255, 255, 255)");
+			this.activeDots[(dotID-1)] = false;
+			console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
+			console.log("OFF")
+			/*
+			else if ($("#Braille-dot-" + dotNumber).css("background-color") == 'rgb(0, 0, 0)'){
+			$("#Braille-dot-" + dotNumber).css("background-color","rgb(255, 255, 255)");
+			activeDots[(dotNumber-1)] = false;
+			console.log("Array contence: " + activeDots[(dotNumber-1)] + "Dot number " + dotNumber);
+			*/
+
+		}
+		}
+}
+
+/*
+var tile = {
+	//activeDots : [false,false,false,false,false,false],
+	a :10,
+	//fullName : function() {
+    //return this.firstName + " " + this.lastName;
+
+    fncDrawTile : function drawTile()
+    {
+    		$("#mainContainer").append("<div class=\"Braille-container\"><div class=\"Braille-dot\" id=\"Braille-dot-1\" onclick=\"dotClick(1)\"></div><div class=\"Braille-dot\" id=\"Braille-dot-4\" onclick=\"dotClick(4)\"></div><div class=\"Braille-dot\" id=\"Braille-dot-2\" onclick=\"dotClick(2)\"></div><div class=\"Braille-dot\" id=\"Braille-dot-5\" onclick=\"dotClick(5)\"></div><div class=\"Braille-dot\" id=\"Braille-dot-3\" onclick=\"dotClick(3)\"></div><div class=\"Braille-dot\" id=\"Braille-dot-6\" onclick=\"dotClick(6)\"></div>");
+    }
+
+
+
+    /*
+	setDots : function dotClick(dotNumber)
+	{
+		
+		if($("#Braille-dot-" + dotNumber).css("background-color") == 'rgb(255, 255, 255)'){
+			$("#Braille-dot-" + dotNumber).css("background-color","rgb(0, 0, 0)");
+			this.activeDots[(dotNumber-1)] = true;
+			console.log("Array contence: " + this.activeDots[(dotNumber-1)] + "Dot number " + dotNumber);
+
+		} else if ($("#Braille-dot-" + dotNumber).css("background-color") == 'rgb(0, 0, 0)'){
+			$("#Braille-dot-" + dotNumber).css("background-color","rgb(255, 255, 255)");
+			this.activeDots[(dotNumber-1)] = false;
+			console.log("Array contence: " + this.activeDots[(dotNumber-1)] + "Dot number " + dotNumber);
+			
+
+		}
+
+	}*/
+//}; 
+
+
+
 
 function addTile()
 {
 
-
+	
+// activeTiles[1] = new tile;
+activeTiles.push(new tile);
 
 }

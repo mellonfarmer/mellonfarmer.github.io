@@ -1,29 +1,29 @@
 #mainContainer
 {
-	width: 142px;
-	height: 215px;
-	margin-left: 46%;
+	//width: 142px;
+	//height: 215px;
+	//margin-left: 46%;
 	margin-top: 10%;
-
+	display: flex;
 }
         
 .Braille-container
 {
-	width: 140px;
-	height: 210px;
-	margin-left: 1%;
-	margin-top: 1%;
-	border-style: solid;
-	border-color: #334142;
-	border-radius: 35px;
+	width: 90px;
+    height: 135px;
+    margin-left: 1%;
+    margin-top: 1%;
+    border-style: solid;
+    border-color: #334142;
+    border-radius: 25px;
 	/* top: 60px; */
 }
 .Braille-dot
 {
 	background-color: #ffffff;
-	height: 50px;
-	width: 50px;
-	border-radius: 360px;
+	height: 25px;
+	width: 25px;
+	border-radius: 30px;
 	float:left;
 	margin: 7px;
 	border-style: solid;
@@ -33,7 +33,7 @@
 {
 	border-style: solid;
     height: 9%;
-    width: 20%;
+    width: 25%;
     margin-top: 50px;
     margin-left: 40%;
     text-align: center;

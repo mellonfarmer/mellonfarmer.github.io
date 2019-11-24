@@ -41,39 +41,7 @@ let lookup = {
 
 var text = "";
 var activeTiles = [];
-function dotClick(dotNumber)
-{
-		//take dot number
-		//toggle boolen value depending on dot on or off
-		//lookup braille list
-		//update text with appropirate letter
-		//eventually have it so you can write a letter and the brallie will appear
 
-		
-		
-		if($("#Braille-dot-" + dotNumber).css("background-color") == 'rgb(255, 255, 255)'){
-			$("#Braille-dot-" + dotNumber).css("background-color","rgb(0, 0, 0)");
-			activeDots[(dotNumber-1)] = true;
-			console.log("Array contence: " + activeDots[(dotNumber-1)] + "Dot number " + dotNumber);
-
-		} else if ($("#Braille-dot-" + dotNumber).css("background-color") == 'rgb(0, 0, 0)'){
-			$("#Braille-dot-" + dotNumber).css("background-color","rgb(255, 255, 255)");
-			activeDots[(dotNumber-1)] = false;
-			console.log("Array contence: " + activeDots[(dotNumber-1)] + "Dot number " + dotNumber);
-			
-
-		}
-		//6 elements in array
-		//need to know which are true
-
-		//rewrite
-		
-		function updateText(){
-		//$("#lblOutput").text(getSelectedDots())
-			
-		}
-		updateText();
-}
 class tile{
 	//give id
 	constructor()

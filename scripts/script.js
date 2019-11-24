@@ -4,8 +4,42 @@ script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 
+let lookup = {
+	"0" : "a",
+	"01" : "b",
+	"03" : "c",
+	"034" : "d",
+	"04" : "e",
+	"013" : "f",
+	"0134" : "g",
+	"014" : "h",
+	"13" : "i",
+	"134" : "j",
 
-var activeDots =[false,false,false,false,false,false];
+	"02" : "k",
+	"012" : "l",
+	"023" : "m",
+	"0234" : "n",
+	"024" : "o",
+	"0123" : "p",
+	"01234" : "q",
+	"0124" : "r",
+	"123" : "s",
+	"1234" : "t",
+
+	"025" : "u",
+	"0125" : "v",
+	"1345" : "w",
+	"0235" : "x",
+	"02345" : "y",
+	"0245" : "z",
+
+	"" : " "
+
+
+}
+
+var text = "";
 var activeTiles = [];
 function dotClick(dotNumber)
 {
@@ -36,160 +70,7 @@ function dotClick(dotNumber)
 		
 		function updateText(){
 		//$("#lblOutput").text(getSelectedDots())
-			if (activeDots[2] == false && activeDots[5] == false) {
-			//a
-				if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == false && activeDots[4] == false)
-				{
-					$("#lblOutput").text("a");
-				}
-				//b
-				else if (activeDots[0] == true && activeDots[1] == true && activeDots[3] == false && activeDots[4] == false)
-				{
-					$("#lblOutput").text("b");
-					//console.log("b on")
-				}//c 
-				else if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == true	&& activeDots[4] == false)
-				{
-					$("#lblOutput").text("c");
-					//console.log("b on")
-				}//d
-				else if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == true	&& activeDots[4] == true)
-				{
-					$("#lblOutput").text("d");
-					//console.log("b on")
-				}//e
-				else if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == false	&& activeDots[4] == true)
-				{
-					$("#lblOutput").text("e");
-					//console.log("b on")
-				}//f
-				else if (activeDots[0] == true && activeDots[1] == true && activeDots[3] == true	&& activeDots[4] == false)
-				{
-					$("#lblOutput").text("f");
-					//console.log("b on")
-				}//g
-				else if (activeDots[0] == true && activeDots[1] == true && activeDots[3] == true	&& activeDots[4] == true)
-				{
-					$("#lblOutput").text("g");
-					//console.log("b on")
-				}//h
-				else if (activeDots[0] == true && activeDots[1] == true && activeDots[3] == false	&& activeDots[4] == true)
-				{
-					$("#lblOutput").text("h");
-					//console.log("b on")
-				}//i
-				else if (activeDots[0] == false && activeDots[1] == true && activeDots[3] == true	&& activeDots[4] == false)
-				{
-					$("#lblOutput").text("i");
-					//console.log("b on")
-				}//j
-				else if (activeDots[0] == false && activeDots[1] == true && activeDots[3] == true && activeDots[4] == true)
-				{
-					$("#lblOutput").text("j");
-					//console.log("b on")
-				}
-				else{
-					$("#lblOutput").text("");
-				}
-			} else if (activeDots[2] == true && activeDots[5] == false){
-				//k
-				if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == false && activeDots[4] == false)
-				{
-					$("#lblOutput").text("k");
-				}
-				//l
-				else if (activeDots[0] == true && activeDots[1] == true && activeDots[3] == false && activeDots[4] == false)
-				{
-					$("#lblOutput").text("l");
-					//console.log("b on")
-				}//m 
-				else if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == true	&& activeDots[4] == false)
-				{
-					$("#lblOutput").text("m");
-					//console.log("b on")
-				}//n
-				else if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == true	&& activeDots[4] == true)
-				{
-					$("#lblOutput").text("n");
-					//console.log("b on")
-				}//o
-				else if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == false	&& activeDots[4] == true)
-				{
-					$("#lblOutput").text("o");
-					//console.log("b on")
-				}//p
-				else if (activeDots[0] == true && activeDots[1] == true && activeDots[3] == true	&& activeDots[4] == false)
-				{
-					$("#lblOutput").text("p");
-					//console.log("b on")
-				}//q
-				else if (activeDots[0] == true && activeDots[1] == true && activeDots[3] == true	&& activeDots[4] == true)
-				{
-					$("#lblOutput").text("q");
-					//console.log("b on")
-				}//r
-				else if (activeDots[0] == true && activeDots[1] == true && activeDots[3] == false	&& activeDots[4] == true)
-				{
-					$("#lblOutput").text("r");
-					//console.log("b on")
-				}//s
-				else if (activeDots[0] == false && activeDots[1] == true && activeDots[3] == true	&& activeDots[4] == false)
-				{
-					$("#lblOutput").text("s");
-					console.log("S")
-				}//t
-				else if (activeDots[0] == false && activeDots[1] == true && activeDots[3] == true && activeDots[4] == true)
-				{
-					$("#lblOutput").text("t");
-					console.log("t")
-				}else
-				{
-					$("#lblOutput").text("");
-				}
-				
-					
-			}else if (activeDots[2] == true && activeDots[5] == true){
-
-				if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == false && activeDots[4] == false)
-				{
-					$("#lblOutput").text("u");
-				}
-				//l
-				else if (activeDots[0] == true && activeDots[1] == true && activeDots[3] == false && activeDots[4] == false)
-				{
-					$("#lblOutput").text("v");
-					//console.log("b on")
-				}//m 
-				else if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == true	&& activeDots[4] == false)
-				{
-					$("#lblOutput").text("x");
-					//console.log("b on")
-				}//n
-				else if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == true	&& activeDots[4] == true)
-				{
-					$("#lblOutput").text("y");
-					//console.log("b on")
-				}//o
-				else if (activeDots[0] == true && activeDots[1] == false && activeDots[3] == false	&& activeDots[4] == true)
-				{
-					$("#lblOutput").text("z");
-					//console.log("b on")
-				}else 
-				{
-					$("#lblOutput").text("");
-				}
-			}
-			else if (activeDots[2] == false && activeDots[5] == true){
-				
-				if (activeDots[0] == false && activeDots[1] == true && activeDots[3] == true && activeDots[4] == true)
-				{
-					$("#lblOutput").text("w");
-				}
-				else 
-				{
-					$("#lblOutput").text("");
-				}
-			}
+			
 		}
 		updateText();
 }
@@ -233,87 +114,21 @@ class tile{
 		{
 			$("#Braille-dot-id-" + this.tileId + "-"+ dotID).css("background-color","rgb(0, 0, 0)");
 			this.activeDots[(dotID-1)] = true;
-			console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
+			getAllDots();
+			//console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
 		} 
 
 		else if($("#Braille-dot-id-" + this.tileId + "-"+ dotID).css("background-color") == 'rgb(0, 0, 0)')
 		{
 			$("#Braille-dot-id-" + this.tileId + "-"+ dotID).css("background-color","rgb(255, 255, 255)");
 			this.activeDots[(dotID-1)] = false;
-			console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
+			getAllDots();
+			//console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
 		}
 
 	}
 }
 
-/*
-var tile = {
-	//activeDots : [false,false,false,false,false,false],
-	a :10,
-	//fullName : function() {
-    //return this.firstName + " " + this.lastName;
-
-    fncDrawTile : function drawTile()
-    {
-    		$("#mainContainer").append("<div class=\"Braille-container\"><div class=\"Braille-dot\" id=\"Braille-dot-1\" onclick=\"dotClick(1)\"></div><div class=\"Braille-dot\" id=\"Braille-dot-4\" onclick=\"dotClick(4)\"></div><div class=\"Braille-dot\" id=\"Braille-dot-2\" onclick=\"dotClick(2)\"></div><div class=\"Braille-dot\" id=\"Braille-dot-5\" onclick=\"dotClick(5)\"></div><div class=\"Braille-dot\" id=\"Braille-dot-3\" onclick=\"dotClick(3)\"></div><div class=\"Braille-dot\" id=\"Braille-dot-6\" onclick=\"dotClick(6)\"></div>");
-    }
-
-
-
-    /*
-	setDots : function dotClick(dotNumber)
-	{
-		
-		if($("#Braille-dot-" + dotNumber).css("background-color") == 'rgb(255, 255, 255)'){
-			$("#Braille-dot-" + dotNumber).css("background-color","rgb(0, 0, 0)");
-			this.activeDots[(dotNumber-1)] = true;
-			console.log("Array contence: " + this.activeDots[(dotNumber-1)] + "Dot number " + dotNumber);
-
-		} else if ($("#Braille-dot-" + dotNumber).css("background-color") == 'rgb(0, 0, 0)'){
-			$("#Braille-dot-" + dotNumber).css("background-color","rgb(255, 255, 255)");
-			this.activeDots[(dotNumber-1)] = false;
-			console.log("Array contence: " + this.activeDots[(dotNumber-1)] + "Dot number " + dotNumber);
-			
-
-		}
-
-	}*/
-//}; 
-
-let lookup = {
-	"0" : "a",
-	"01" : "b",
-	"03" : "c",
-	"034" : "d",
-	"04" : "e",
-	"013" : "f",
-	"0134" : "g",
-	"014" : "h",
-	"13" : "i",
-	"134" : "j",
-
-	"02" : "k",
-	"012" : "l",
-	"023" : "m",
-	"0234" : "n",
-	"024" : "o",
-	"0123" : "p",
-	"01234" : "q",
-	"0124" : "r",
-	"123" : "s",
-	"1234" : "t",
-
-	"025" : "u",
-	"0125" : "v",
-	"1345" : "w",
-	"0235" : "x",
-	"02345" : "y",
-	"0245" : "z",
-
-	"" : " "
-
-
-}
 
 
 function addTile()
@@ -323,8 +138,6 @@ function addTile()
 
 }
 
-var text = "";
-var copleteText =[];
 
 function getAllDots()
 {	
@@ -337,8 +150,14 @@ function getAllDots()
 			if (activeTiles[i].getactiveDots(y) == true)
 				activeDotsInCuttentTile = activeDotsInCuttentTile + y; //+ y + " ";
 		}
+		letterCheck = lookup[activeDotsInCuttentTile];
+		if (letterCheck == undefined){
+			text = text;
+		}else
+		{
+			text = text + lookup[activeDotsInCuttentTile];
+		}
 		
-		text = text + lookup[activeDotsInCuttentTile];
 		
 	}
 	

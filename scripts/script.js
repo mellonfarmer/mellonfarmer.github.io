@@ -83,7 +83,15 @@ class tile{
 		{
 			$("#Braille-dot-id-" + this.tileId + "-"+ dotID).css("background-color","rgb(0, 0, 0)");
 			this.activeDots[(dotID-1)] = true;
-			getAllDots();
+
+			if($("#dbgGetDpts").is(":checked"))
+			{
+				getAllDotValues();
+			}
+			else
+			{
+				getAllDots();
+			}
 			//console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
 		} 
 
@@ -91,7 +99,16 @@ class tile{
 		{
 			$("#Braille-dot-id-" + this.tileId + "-"+ dotID).css("background-color","rgb(255, 255, 255)");
 			this.activeDots[(dotID-1)] = false;
-			getAllDots();
+
+			if($("#dbgGetDpts").is(":checked"))
+			{
+				getAllDotValues();
+			}
+			else
+			{
+				getAllDots();
+			}
+			//getAllDots();
 			//console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
 		}
 
@@ -142,6 +159,28 @@ function getAllDots()
 		{
 			text = text + lookup[activeDotsInCuttentTile];
 		}
+		
+		
+	}
+	
+	$("#lblOutput").text(text);
+}
+
+function getAllDotValues()
+{	
+	text = "";
+	//get tile id, get dot array, output to a string
+	for (var i = 0; i <= activeTiles.length -1 ; i++) {
+		var activeDotsInCuttentTile = "";
+
+		for (var y = 0;y <= 5;y++){
+			if (activeTiles[i].getactiveDots(y) == true)
+				activeDotsInCuttentTile = activeDotsInCuttentTile + y; //+ y + " ";
+		}
+		letterCheck = lookup[activeDotsInCuttentTile];
+		
+		text = activeDotsInCuttentTile;
+		
 		
 		
 	}

@@ -47,6 +47,7 @@ class tile{
 	constructor()
 	{
 		this.activeDots = [false,false,false,false,false,false];
+		//change to count active tiles rather than rely on the array length
 		this.tileId = activeTiles.length;
 		this.drawTile();
 	}
@@ -59,7 +60,7 @@ class tile{
 
 	drawTile()
 	{//activeTiles[this.tileId].setDots(1);
-	    	$("#mainContainer").append("<div class=\"Braille-container\">\
+	    	$("#mainContainer").append("<div class=\"Braille-container\" id=\""+this.tileId+"\">  \
 	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-1\" onclick=\"activeTiles["+this.tileId+"].setDots(1)\"></div>\
 	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-4\" onclick=\"activeTiles["+this.tileId+"].setDots(4)\"></div>\
 	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-2\" onclick=\"activeTiles["+this.tileId+"].setDots(2)\"></div>\
@@ -95,8 +96,24 @@ class tile{
 		}
 
 	}
-}
 
+}
+function removeTile()
+{
+	
+	//get current tile id
+	var ElementToRemove = "#" +( activeTiles.length -1 );
+
+	//remove element
+	$(ElementToRemove).remove();
+
+	//remove id from array	
+	delete activeTiles[activeTiles.length];
+	activeTiles.pop();	
+
+	//refresh text
+	getAllDots()
+}
 
 
 function addTile()

@@ -89,8 +89,15 @@ class tile{
 
 	getactiveDots(dotId)
 	{
+		if (dotId !== ""){
 			return this.activeDots[dotId];
+		}
+		else
+		{
+			return this.activeDots;
+		}
 	}
+
 
 	setDots(dotID)
 	{
@@ -107,7 +114,7 @@ class tile{
 			}
 			else
 			{
-				getAllDots();
+				getAllActiveDots()
 			}
 			//console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
 		} 
@@ -123,9 +130,9 @@ class tile{
 			}
 			else
 			{
-				getAllDots();
+				getAllActiveDots()
 			}
-			//getAllDots();
+			//getAllDotsInSet();
 			//console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
 		}
 
@@ -146,7 +153,7 @@ function removeTile()
 	activeTiles.pop();	
 
 	//refresh text
-	getAllDots()
+	getAllActiveDots()
 }
 
 
@@ -157,31 +164,90 @@ function addTile()
 
 }
 
-
-function getAllDots()
-{	
-	text = "";
-	//get tile id, get dot array, output to a string
-	for (var i = 0; i <= activeTiles.length -1 ; i++) {
-		var activeDotsInCuttentTile = "";
-
-		for (var y = 0;y <= 5;y++){
-			if (activeTiles[i].getactiveDots(y) == true)
-				activeDotsInCuttentTile = activeDotsInCuttentTile + y; //+ y + " ";
-		}
-		letterCheck = lookup[activeDotsInCuttentTile];
-		if (letterCheck == undefined){
-			text = text;
-		}else
-		{
-			text = text + lookup[activeDotsInCuttentTile];
-		}
-		
-		
-	}
+function updateText(text)
+{
 	
+
+		
 	$("#lblOutput").text(text);
+
 }
+
+function textLookup(dotinput)
+{
+	text = "";
+	letterCheck = lookup[dotinput];
+	if (letterCheck == undefined){
+		text = text;
+	}else
+	{
+		text = text + lookup[dotinput];
+	}
+
+	return text
+}
+
+function getActiveDotsForCurrentTile(tileId)
+{	
+	//var returnText ="";
+	//get tile id, get dot array, output to a string
+
+
+	//for (var i = 0; i <= activeTiles.length -1 ; i++) 
+	//{
+		var activeDotsInCurrentTileSet = "";
+		//get active dots for current tile and convert active to numbers
+		for (var y = 0;y <= 5;y++)
+		{
+			if (activeTiles[tileId].getactiveDots(y) == true)
+				activeDotsInCurrentTileSet = activeDotsInCurrentTileSet + y; //+ y + " ";
+		}
+	
+		//returnText = returnText + textLookup(dotinput);
+	//}
+	
+	//return returnText
+	return activeDotsInCurrentTileSet
+}
+function getAllActiveDots()
+{
+	var returnText =""
+	for (var i = 0; i <= activeTiles.length -1 ; i++) 
+	{
+		returnText += textLookup(getActiveDotsForCurrentTile(i));
+
+	}
+	//returnText = returnText + textLookup(dotinput);
+	updateText(returnText);
+}
+/*
+	set the dots on the tile
+	
+	funciton 1 gets the dots at spescifed tile
+	getTileDots(0)
+
+
+	update the text
+
+*/
+
+/*
+	Worker funcitons
+*/
+
+/*
+function getAllDots()
+{
+	//will handle the text string
+	var OutputText = ""
+	var getAllDotsInSet()
+	textLookup()
+	updateText(OutputText);
+
+}
+
+*/
+
 
 function getAllDotValues()
 {	
@@ -203,4 +269,21 @@ function getAllDotValues()
 	}
 	
 	$("#lblOutput").text(text);
+}
+
+function getDotString()
+{
+	//get all the dot values as a binary string and output to text box
+
+	//get all the dots in the acriveTiles array
+	var binaryString="";
+
+	for (var position=0; position <= activeTiles.length; position++)
+	{
+		binaryString = binaryString + activeTiles[position].getactiveDots();
+	}
+	//output as eith a 1 or 0 depending if they are active or not
+
+	$("#lblOutput").text(binaryString);
+
 }

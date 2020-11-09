@@ -1,7 +1,19 @@
-var script = document.createElement('script');
+/*var script = document.createElement('script');
 script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
+*/
+function includeScript(Source)
+{
+	var script = document.createElement('script');
+	script.src = Source;
+	script.type = 'text/javascript';
+	document.getElementsByTagName('head')[0].appendChild(script);
+
+}
+
+includeScript('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js');
+includeScript('./scripts/parser.js');
 
 
 let lookup = {
@@ -41,9 +53,9 @@ let lookup = {
 	"145" : ".",
 	"124" : "!",
 	"1245" : "()",
-	"125" : "?\"",
+	"125" : "?\"", //quote start
 	"24" : "*",
-	"245" : "\"",
+	"245" : "\"", //quote end
 	"2" : "\'",
 	"25" : "-",
 

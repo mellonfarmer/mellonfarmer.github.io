@@ -1,0 +1,56 @@
+/*
+	Take brallie binary input of 6 bits and turn them into words
+	
+	example data: a-z
+	100000110000100100100110100010110100110110110010010100010110101000111000101100101110101010111100111110111010011100011110101001111001010111101101101111101011
+	
+	a-c:
+	100000110000100100
+
+	a-e:
+	100000110000100100100110100010
+
+	1.identify a single character via the 6 bits
+
+*/
+let exampleData26 = "100000110000100100100110100010110100110110110010010100010110101000111000101100101110101010111100111110111010011100011110101001111001010111101101101111101011"
+let exampleDataB = "10000011000010010010011010001011010011011011001001010001011010100011100010110010111010101011110011111011101001110001111010100111100101011110110110111110101"
+
+let exampleData3 = "100000110000100100"
+let exampleData5 = "100000110000100100100110100010"
+
+
+function validateStringSize(input)
+{
+	var modTest =  ( 6 / input.length )
+	var modTestMod = ( modTest % 6)*100
+	if (modTestMod % 6)
+	{
+		return 0
+
+	}else{
+		 return 1
+	}
+
+}
+
+
+
+//rename this
+function mainProcess(input)
+{
+	//check datasize is correct
+	var test = validateStringSize(input)
+	if(test == 0)
+	{
+		return "We found a match"
+	}
+	else
+	{
+		return "Data didnt matchtch"
+	}
+
+
+}
+alert(mainProcess(exampleData3))
+alert(mainProcess(exampleDataB))

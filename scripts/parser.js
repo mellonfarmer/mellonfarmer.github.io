@@ -68,11 +68,12 @@ let exampleDataB = "100000110000100100100110100010110100110110110010010100010110
 let exampleData3 = "100000110000100100"
 //a bcde
 let exampleData6 = "100000000000110000100100100110100010"
-//full caps A BCDE
-let exampleDataCF = "000001000001100000000000110000100100100110100010"
+//full caps ABCDE
+let exampleDataCF = "000001000001100000110000100100100110100010"
 //first cap A bcde
 let exampleDataCS = "000001100000000000110000100100100110100010"
 
+let exampleDataCWS = "000001000001100000110000100100100110100010000000100000100000"
 
 
 // --- process data --- //
@@ -130,13 +131,12 @@ function processString(inputArray)
 					if( inputArray[i + 1] == "000001")
 					{
 						isCaps = true
+						i++
 					}// if caps is true for the next tile set the falg, the fi will continue to write in caps untill the flag is turned off
 					else
 					{
 						text = text + bpCapital(lookupParser[inputArray[i+1]]);
 						i++
-
-
 					}
 				}
 				else
@@ -146,7 +146,7 @@ function processString(inputArray)
 					text = text + bpCapital(letterCheck);
 				}
 			break;
-			
+
 			case "SPACE":
 				//clear all flags
 				isCaps = false
@@ -155,7 +155,15 @@ function processString(inputArray)
 			break;
 		
 			default:
-				text = text + letterCheck
+				//check for flags set above
+				if(Boolean(isCaps) == true)
+				{
+					text = text + bpCapital(letterCheck);
+				}
+				else
+				{
+					text = text + letterCheck
+				}
 				break;
 		}
 
@@ -196,6 +204,6 @@ function mainProcess(input)
 	//process
 
 }
-//console.log(processString(inputToArray(exampleDataCS)))
-console.log(processString(inputToArray(exampleDataCF)))
+console.log(processString(inputToArray(exampleDataCWS)))
+//console.log(processString(inputToArray(exampleDataCF)))
 //console.log(inputToArray(exampleData26))

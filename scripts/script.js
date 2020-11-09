@@ -177,7 +177,7 @@ function textLookup(dotinput)
 		text = text;
 	}else
 	{
-		text = text + lookup[dotinput];
+		text = text + letterCheck;
 	}
 
 	return text

@@ -274,7 +274,14 @@ let NUMBER =
     "special":"true"
 
 }
+let undefined_handler =
+{
+	"id" : "undefined",
+	"name":"undefined",
+	"character":"",
+    "special":"true"
 
+}
 
 
 
@@ -283,7 +290,7 @@ var lookupParser = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z]
 //punctuation
 lookupParser.push(comma,semicolon,colon,fullstop,exclimation,brackets,questionmark,astrix,backslash,hyphen)
 //special
-lookupParser.push(SPACE,CAPS,NUMBER)
+lookupParser.push(SPACE,CAPS,NUMBER,undefined_handler)
 
 
 
@@ -430,66 +437,68 @@ function processString(inputArray)
 		}catch(e){
 			console.log(e)
 		}
-		
-		switch (letterCheck.id) { //switch sets the flags
-			case "000001": //captial
-				if (Boolean(isCaps) == false)
-				{
-					//look ahead to see if the next tile is a caps symbol
-					if(nextLetterCheck.id == "000001")
+		if(letterCheck !== undefined){
+			switch (letterCheck.id) { //switch sets the flags
+				case "000001": //captial
+					if (Boolean(isCaps) == false)
 					{
-						isCaps = true
-						isFlagSet = true
-						i++
-					}// if caps is true for the next tile set the falg, the fi will continue to write in caps untill the flag is turned off
-					else //if the character ahead is special it will be capitalised, way round is to set a special flag in the object, need to set up objects for the tiles next
-					{
-						//text = text + bpCapital(lookupParser[inputArray[i+1]].id);
-						//text = text + lookupParser[inputArray[i+1]].);
-						text = text + nextLetterCheck.uppercase;
-						i++
+						if(nextLetterCheck !== undefined){
+						//look ahead to see if the next tile is a caps symbol
+							if(nextLetterCheck.id == "000001")
+							{
+								isCaps = true
+								isFlagSet = true
+								i++
+							}// if caps is true for the next tile set the falg, the fi will continue to write in caps untill the flag is turned off
+							else //if the character ahead is special it will be capitalised, way round is to set a special flag in the object, need to set up objects for the tiles next
+							{
+								//text = text + bpCapital(lookupParser[inputArray[i+1]].id);
+								//text = text + lookupParser[inputArray[i+1]].);
+								text = text + nextLetterCheck.uppercase;
+								i++
+							}
+						}
 					}
-				}
-				else
-				{
-					//isCaps = false;
-					//bpCapital(element)
-					if (Boolean(isFlagSet)== false)
+					else
 					{
-						//text = text + bpCapital(letterCheck);
+						//isCaps = false;
+						//bpCapital(element)
+						if (Boolean(isFlagSet)== false)
+						{
+							//text = text + bpCapital(letterCheck);
+							text = text + letterCheck.uppercase;
+						}
+					}
+				break;
+
+				case undefined:
+					//do nothing if character is undefined
+					break;
+
+				case "000000": //space
+					//clear all flags
+					isCaps = false
+					// return a space to the text processor
+					//if (Boolean(isFlagSet)== false)
+					//{
+						text = text + " "
+					//}
+					isFlagSet = false
+				break;
+			
+				default:
+					//check for flags set above
+					if(Boolean(isCaps) == true)
+					{
 						text = text + letterCheck.uppercase;
 					}
-				}
-			break;
-
-			case undefined:
-				//do nothing if character is undefined
-				break;
-
-			case "000000": //space
-				//clear all flags
-				isCaps = false
-				// return a space to the text processor
-				//if (Boolean(isFlagSet)== false)
-				//{
-					text = text + " "
-				//}
-				isFlagSet = false
-			break;
-		
-			default:
-				//check for flags set above
-				if(Boolean(isCaps) == true)
-				{
-					text = text + letterCheck.uppercase;
-				}
-				else
-				{
-					text = text + letterCheck.character
-				}
-				break;
+					else
+					{
+						text = text + letterCheck.character
+					}
+					break;
+			}
 		}
-
 	}
 	
 
@@ -528,7 +537,7 @@ function mainProcess(input)
 
 
 
-console.log(mainProcess("100000"))
+//console.log(mainProcess("100000"))
 
 //console.log(processString(inputToArray(exampleDataCWS)))
 //console.log(processString(inputToArray(exampleDataCF)))

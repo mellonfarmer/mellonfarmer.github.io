@@ -14,6 +14,8 @@ function includeScript(Source)
 
 includeScript('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js');
 includeScript('./scripts/parser.js');
+includeScript('./scripts/processing.js');
+
 
 
 let lookup = {
@@ -154,7 +156,6 @@ function removeTile()
 	checkboxUpdate();
 }
 
-
 function addTile()
 {
 	// activeTiles[1] = new tile;
@@ -164,11 +165,10 @@ function addTile()
 
 function updateText(text)
 {
-
 	$("#lblOutput").text(text);
-
 }
 
+//remove
 function textLookup(dotinput)
 {
 	text = "";
@@ -183,6 +183,7 @@ function textLookup(dotinput)
 	return text
 }
 
+//remove
 function getActiveDotsForCurrentTile(tileId)
 {	
 	//get active dots for current tile and convert active to numbers
@@ -200,7 +201,7 @@ function getActiveDotsForCurrentTile(tileId)
 }
 
 
-
+//keep possibly add to the class
 function getActiveDotsForCurrentTileBinary(tileId)
 {	
 	//get active dots for current tile and convert active to numbers
@@ -228,12 +229,7 @@ function getActiveDotsForCurrentTileBinary(tileId)
 
 
 
-
-
-
-
-
-
+//remove
 function getAllActiveDots()
 {
 	var returnText =""
@@ -246,7 +242,7 @@ function getAllActiveDots()
 }
 
 
-
+//remove
 function getAllDotValues()
 {	
 	text = "";
@@ -269,6 +265,7 @@ function getAllDotValues()
 	$("#lblOutput").text(text);
 }
 
+//keep
 function getDotBinary()
 {
 	//get all the dot values as a binary string and output to text box
@@ -281,22 +278,9 @@ function getDotBinary()
 		returnText += getActiveDotsForCurrentTileBinary(i);
 
 	}
+	return returnText
 	updateText(returnText);
 
-
-
-
-/*
-	var binaryString="";
-
-	for (var position=0; position <= activeTiles.length; position++)
-	{
-		binaryString = binaryString + activeTiles[position].getactiveDots();
-	}
-	//output as eith a 1 or 0 depending if they are active or not
-
-	$("#lblOutput").text(binaryString);
-*/
 }
 
 //-----------HTML Events---------------
@@ -309,7 +293,10 @@ function checkboxUpdate()
 	}
 	else
 	{
-		getAllActiveDots()
+		//var binaryString = 
+		updateText(mainProcess(getDotBinary()))
+		//mainProcess(getDotBinary)
+		//getAllActiveDots()
 	}
 
 }

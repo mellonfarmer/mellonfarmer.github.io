@@ -1,3 +1,10 @@
+$.getScript("brailleTiles.js", function() {
+	alert("Script loaded but not necessarily executed.");
+ });
+ $.getScript("processing.js", function() {
+	alert("Script loaded but not necessarily executed.");
+ });
+
 /*
 	Take brallie binary input of 6 bits and turn them into words
 	
@@ -76,39 +83,9 @@ let exampleDataCS = "000001100000000000110000100100100110100010"
 let exampleDataCWS = "000001000001100000110000100100100110100010000000100000100000"
 
 
-// --- process data --- //
-//move processing to a diffirent place later
-//fix this
-function validateStringSize(input)
-{
-	var modTest =  ( 3 / input.length )
-	var modTestMod = ( modTest % 6)*100
-	if (modTestMod % 6)
-	{
-		return 0
 
-	}else{
-		 return 1
-	}
-
-}
-
-function inputToArray(input)
-{
-	var inputarray =[]
-	var a = 0
-	var b = 6
-	var temp = input.length / 6
-	//divide each 6 bits and put them into an array
-	for (var i =0;i < temp;i++)
-	{
-		inputarray.push(input.slice(a,b))
-		a = b
-		b = b + 6
-	}
-
-	return inputarray
-}
+//flags
+var isFlagSet = false
 var isCaps = false
 // --- parser functions --- //
 function processString(inputArray)
@@ -119,10 +96,6 @@ function processString(inputArray)
 		//const element = inputArray[i];
 		letterCheck = lookupParser[inputArray[i]];
 
-		
-		//Boolean(isCaps)
-
-		
 		switch (letterCheck) { //switch sets the flags
 			case "CAPS": //captial
 				if (Boolean(isCaps) == false)
@@ -131,9 +104,10 @@ function processString(inputArray)
 					if( inputArray[i + 1] == "000001")
 					{
 						isCaps = true
+						isFlagSet = true
 						i++
 					}// if caps is true for the next tile set the falg, the fi will continue to write in caps untill the flag is turned off
-					else
+					else //if the character ahead is special it will be capitalised, way round is to set a special flag in the object, need to set up objects for the tiles next
 					{
 						text = text + bpCapital(lookupParser[inputArray[i+1]]);
 						i++
@@ -143,15 +117,26 @@ function processString(inputArray)
 				{
 					//isCaps = false;
 					//bpCapital(element)
-					text = text + bpCapital(letterCheck);
+					if (Boolean(isFlagSet)== false)
+					{
+						text = text + bpCapital(letterCheck);
+					}
 				}
 			break;
+
+			case undefined:
+				//do nothing if character is undefined
+				break;
 
 			case "SPACE":
 				//clear all flags
 				isCaps = false
 				// return a space to the text processor
-				text = text + " "
+				if (Boolean(isFlagSet)== false)
+				{
+					text = text + " "
+				}
+				isFlagSet = false
 			break;
 		
 			default:
@@ -167,16 +152,15 @@ function processString(inputArray)
 				break;
 		}
 
-		
-
 	}
-	//});
+	
 
 	return text
 }
 
 function bpCapital(letter)
 {
+	//private finctin to convert to caps
 	let toConvert = letter.toUpperCase()
 	return toConvert
 
@@ -186,24 +170,29 @@ function bpCapital(letter)
 //rename this
 function mainProcess(input)
 {
-	/////////preperation
-	//check datasize is correct
-	/*var test = validateStringSize(input)
-	if(test == 0)
-	{
-		return "We found a match"
-	}
-	else
-	{
-		return "Data didnt matchtch"
-	}
-	*/
-	//split data 
-	//processString(inputToArray(exampleData26))
 
-	//process
+	try {	
+		validateStringSize(input)
+
+	} catch (e) {
+		console.error(e)
+		return "Input Error"
+	}
+	//data is valid now convert to a collection of 6 characters
+	let Temp = inputToArray(input)
+	
+	//process bBinary to string of text
+	return processString(Temp)
+
 
 }
-console.log(processString(inputToArray(exampleDataCWS)))
+
+
+
+//console.log(mainProcess("000001011100110010100000101001101110"))
+
+//console.log(processString(inputToArray(exampleDataCWS)))
 //console.log(processString(inputToArray(exampleDataCF)))
 //console.log(inputToArray(exampleData26))
+//validateStringSize(exampleDataB)
+

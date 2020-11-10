@@ -2,172 +2,172 @@
 //data
 
 //#region
-let a =
+let bt_a =
 {   
     "id" : "100000",
     "character": "a",
     "uppercase": "A",
     "number":"1"
 }
-let b =
+let bt_b =
 {   
     "id" : "110000",
     "character": "b",
     "uppercase": "B",
     "number":"2"
 }
-let c =
+let bt_c =
 {   
     "id" : "100100",
     "character": "c",
     "uppercase": "C",
     "number":"3"
 }
-let d =
+let bt_d =
 {   
     "id" : "100110",
     "character": "d",
     "uppercase": "D",
     "number":"4"
 }
-let e =
+let bt_e =
 {   
     "id" : "100010",
     "character": "e",
     "uppercase": "E",
     "number":"5"
 }
-let f =
+let bt_f =
 {   
     "id" : "110100",
     "character": "f",
     "uppercase": "F",
     "number":"6"
 }
-let g =
+let bt_g =
 {   
     "id" : "110110",
     "character": "g",
     "uppercase": "G",
     "number":"7"
 }
-let h =
+let bt_h =
 {   
     "id" : "110010",
     "character": "h",
     "uppercase": "H",
     "number":"8"
 }
-let i =
+let bt_i =
 {   
     "id" : "010100",
     "character": "i",
     "uppercase": "I",
     "number":"9"
 }
-let j =
+let bt_j =
 {   
     "id" : "010110",
     "character": "j",
     "uppercase": "J",
     "number":"0"
 }
-let k =
+let bt_k =
 {   
     "id" : "101000",
     "character": "k",
     "uppercase": "K"
 }
-let l =
+let bt_l =
 {   
     "id" : "111000",
     "character": "l",
     "uppercase": "L"
 }
-let m =
+let bt_m =
 {   
     "id" : "101100",
     "character": "m",
     "uppercase": "M"
 }
-let n =
+let bt_n =
 {   
     "id" : "101110",
     "character": "n",
     "uppercase": "N"
 }
-let o =
+let bt_o =
 {   
     "id" : "101010",
     "character": "o",
     "uppercase": "O"
 }
-let p =
+let bt_p =
 {   
     "id" : "111100",
     "character": "p",
     "uppercase": "P"
 }
-let q =
+let bt_q =
 {   
     "id" : "111110",
     "character": "q",
     "uppercase": "Q"
 }
-let r =
+let bt_r =
 {   
     "id" : "111010",
     "character": "r",
     "uppercase": "R"
 }
-let s =
+let bt_s =
 {   
     "id" : "011100",
     "character": "s",
     "uppercase": "S"
 }
-let t =
+let bt_t =
 {   
     "id" : "011110",
     "character": "t",
     "uppercase": "T"
 }
-let u =
+let bt_u =
 {   
     "id" : "101001",
     "character": "u",
     "uppercase": "U"
     
 }
-let v =
+let bt_v =
 {   
     "id" : "111001",
     "character": "v",
     "uppercase": "V"
     
 }
-let w =
+let bt_w =
 {   
     "id" : "010111",
     "character": "w",
     "uppercase": "W"
     
 }
-let x =
+let bt_x =
 {   
     "id" : "101101",
     "character": "x",
     "uppercase": "X"
     
 }
-let y =
+let bt_y =
 {   
     "id" : "101111",
     "character": "y",
     "uppercase": "Y"
     
 }
-let z =
+let bt_z =
 {   
     "id" : "101011",
     "character": "z",
@@ -175,71 +175,107 @@ let z =
     
 }
 //comma
-let comma =
+let bt_comma =
 {   
     "id" : "010000",
     "character": ",",
     "uppercase": ","
 }
-let semicolon =
+let bt_semicolon =
 {   
     "id" : "011000",
-    "character": "semicolon",
-    "uppercase": "SEMICOLON"
+    "character": ";",
+    "uppercase": ";"
 }
-let colon =
+let bt_colon =
 {   
     "id" : "010010",
     "character": ":",
     "uppercase": ":"
 }
-let fullstop =
+let bt_fullstop =
 {   
     "id" : "010011",
     "character": ".",
     "uppercase": "."
 }
-let exclimation =
+let bt_exclimation =
 {   
     "id" : "011010",
     "character": "!",
     "uppercase": "!"
 }
-let brackets =           // might need to turn into a special character
+let bt_brackets =           // might need to turn into a special character
 {   
     "id" : "011011",
     "character": "()",
     "uppercase": "()"
 }
-let questionmark = //start of a quote            // might need to turn into a special character
+let bt_questionmark = //start of a quote            // might need to turn into a special character
 {   
     "id" : "011001",
     "character": "?",
     "uppercase": "?"
 }
-let astrix =
+let bt_astrix =
 {   
     "id" : "001010",
     "character": "*",
     "uppercase": "*"
 }
-let backslash =
+let bt_backslash =
 {   
     "id" : "001011",
-    "character": "backslash",
-    "uppercase": "BACKSHLASH"
+    "character": "\"",
+    "uppercase": "\""
 }
-let closequote =
+let bt_closequote =
 {   
     "id" : "010000",
-    "character": "closequote",
-    "uppercase": "CLOASEQUOTE"
+    "character": "\"",
+    "uppercase": "\""
 }
-let hyphen =
+let bt_hyphen =
 {   
     "id" : "001001",
-    "character": "hyphen",
-    "uppercase": "HYPHEN"
+    "character": "-",
+    "uppercase": "-"
+}
+
+//words
+//and	  for	of	   the	  with
+//111101 111111 111011 011101 011111
+let bt_and =
+{   
+    "id" : "111101",
+    "character": "and",
+    "uppercase": "AND" //work out capitals
+}
+
+let bt_for =
+{   
+    "id" : "111111",
+    "character": "for",
+    "uppercase": "FOR" //work out capitals
+}
+
+let bt_of =
+{   
+    "id" : "111101",
+    "character": "of",
+    "uppercase": "OF" //work out capitals
+}
+let bt_the =
+{   
+    "id" : "111101",
+    "character": "the",
+    "uppercase": "THE" //work out capitals
+}
+let bt_with =
+{   
+    "id" : "111101",
+    "character": "with",
+    "uppercase": "WITH" //work out capitals
 }
 
 
@@ -247,7 +283,7 @@ let hyphen =
 
 
 // SPECIAL CHARACTERS
-let SPACE =
+let bt_SPACE =
 {   
 	"id" : "000000",
 	"name":"SPACE",
@@ -255,7 +291,7 @@ let SPACE =
     "uppercase": " ",
     "special":"true"
 }
-let CAPS =
+let bt_CAPS =
 {   
     "id" : "000001",
 	"name":"CAPS",
@@ -265,7 +301,7 @@ let CAPS =
     
 }
 
-let NUMBER =
+let bt_NUMBER =
 {
 
     "id" : "001111",
@@ -274,7 +310,7 @@ let NUMBER =
     "special":"true"
 
 }
-let undefined_handler =
+let bt_undefined_handler =
 {
 	"id" : "undefined",
 	"name":"undefined",
@@ -286,11 +322,11 @@ let undefined_handler =
 
 
 //alphabet
-var lookupParser = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z]
+var lookupParser = [bt_a, bt_b, bt_c, bt_d, bt_e, bt_f, bt_g, bt_h, bt_i, bt_j, bt_k, bt_l, bt_m, bt_n, bt_o, bt_p, bt_q, bt_r, bt_s, bt_t, bt_u, bt_v, bt_w, bt_x, bt_y, bt_z]
 //punctuation
-lookupParser.push(comma,semicolon,colon,fullstop,exclimation,brackets,questionmark,astrix,backslash,hyphen)
+lookupParser.push(bt_comma, bt_semicolon, bt_colon, bt_fullstop, bt_exclimation, bt_brackets, bt_questionmark, bt_astrix, bt_backslash, bt_hyphen)
 //special
-lookupParser.push(SPACE,CAPS,NUMBER,undefined_handler)
+lookupParser.push(bt_SPACE, bt_CAPS, bt_NUMBER, bt_undefined_handler)
 
 
 
@@ -347,74 +383,12 @@ function inputToArray(input)
 	1.identify a single character via the 6 bits
 
 */
-/*
-let lookupParser = {
-	"100000":"a",
-	"110000":"b",
-	"100100":"c",
-	"100110":"d",
-	"100010":"e",
-	"110100":"f",
-	"110110":"g",
-	"110010":"h",
-	"010100":"i",
-	"010110":"j",
-	"101000":"k",
-	"111000":"l",
-	"101100":"m",
-	"101110":"n",
-	"101010":"o",
-	"111100":"p",
-	"111110":"q",
-	"111010":"r",
-	"011100":"s",
-	"011110":"t",
-	"101001":"u",
-	"111001":"v",
-	"010111":"w",
-	"101101":"x",
-	"101111":"y",
-	"101011":"z",
-
-	"010000" : ",",
-	"011000" : ";",
-	"010010" : ":",
-	"010011" : ".",
-	"011010" : "!",
-	"011011" : "()", //add logic for brackets
-	"011001" : "?\"", //quote start // add logic for question marks and quotes
-	"001010" : "*",
-	"001011" : "\"", //quote end
-	"010000" : "\'",
-	"001001" : "-",
-	
-	//special tiles Meaning in caps
-	//space
-	"000000" : "SPACE",
-	//Capital Symbol
-	"000001" : "CAPS",
-	"001111":"NUMBER"
-
-}
-*/
-let exampleData26 = "100000110000100100100110100010110100110110110010010100010110101000111000101100101110101010111100111110111010011100011110101001111001010111101101101111101011"
-let exampleDataB = "10000011000010010010011010001011010011011011001001010001011010100011100010110010111010101011110011111011101001110001111010100111100101011110110110111110101"
-
-let exampleData3 = "100000110000100100"
-//a bcde
-let exampleData6 = "100000000000110000100100100110100010"
-//full caps ABCDE
-let exampleDataCF = "000001000001100000110000100100100110100010"
-//first cap A bcde
-let exampleDataCS = "000001100000000000110000100100100110100010"
-
-let exampleDataCWS = "000001000001100000110000100100100110100010000000100000100000"
-
 
 
 //flags
 var isFlagSet = false
 var isCaps = false
+var isNumber = false
 // --- parser functions --- //
 function processString(inputArray)
 {
@@ -452,8 +426,7 @@ function processString(inputArray)
 							}// if caps is true for the next tile set the falg, the fi will continue to write in caps untill the flag is turned off
 							else //if the character ahead is special it will be capitalised, way round is to set a special flag in the object, need to set up objects for the tiles next
 							{
-								//text = text + bpCapital(lookupParser[inputArray[i+1]].id);
-								//text = text + lookupParser[inputArray[i+1]].);
+
 								text = text + nextLetterCheck.uppercase;
 								i++
 							}
@@ -461,8 +434,7 @@ function processString(inputArray)
 					}
 					else
 					{
-						//isCaps = false;
-						//bpCapital(element)
+
 						if (Boolean(isFlagSet)== false)
 						{
 							//text = text + bpCapital(letterCheck);
@@ -471,9 +443,38 @@ function processString(inputArray)
 					}
 				break;
 
-				case undefined:
-					//do nothing if character is undefined
-					break;
+					/*
+				case "001111": //number
+					if (Boolean(isNumber)== false)
+					{
+						if(nextLetterCheck !== undefined)
+						{
+							//look ahead to see if the next tile is a caps symbol
+							if(nextLetterCheck.id == "001111")
+							{
+								isNumber = true
+								isFlagSet = true
+								i++
+							}// if caps is true for the next tile set the falg, the fi will continue to write in caps untill the flag is turned off
+							else //if the character ahead is special it will be capitalised, way round is to set a special flag in the object, need to set up objects for the tiles next
+							{
+
+								text = text + nextLetterCheck.number;
+								i++
+							}
+						}
+
+					}else
+					{
+
+						if (Boolean(isFlagSet)== false)
+						{
+							//text = text + bpCapital(letterCheck);
+							text = text + letterCheck.number;
+						}
+					}
+				break;
+				*/
 
 				case "000000": //space
 					//clear all flags
@@ -481,11 +482,18 @@ function processString(inputArray)
 					// return a space to the text processor
 					//if (Boolean(isFlagSet)== false)
 					//{
-						text = text + " "
+					
+					text = text + " "
+					
 					//}
 					isFlagSet = false
 				break;
-			
+
+				case undefined:
+					//do nothing if character is undefined, still needs to update text(test)
+					text = text;
+					break;
+
 				default:
 					//check for flags set above
 					if(Boolean(isCaps) == true)
@@ -505,6 +513,7 @@ function processString(inputArray)
 	return text
 }
 
+//remove
 function bpCapital(letter)
 {
 	//private finctin to convert to caps
@@ -513,9 +522,7 @@ function bpCapital(letter)
 
 }
 
-//import {validateStringSize} from './processing.js'
-//import {inputToArray} from './processing.js'
-//rename this
+//rename
 function mainProcess(input)
 {
 	
@@ -534,16 +541,6 @@ function mainProcess(input)
 
 
 }
-
-
-
-//console.log(mainProcess("100000"))
-
-//console.log(processString(inputToArray(exampleDataCWS)))
-//console.log(processString(inputToArray(exampleDataCF)))
-//console.log(inputToArray(exampleData26))
-//validateStringSize(exampleDataB)
-
 
 
 

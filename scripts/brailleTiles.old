@@ -1,54 +1,6 @@
 //data
-/*
-let lookupParser = {
-	"100000":"a",
-	"110000":"b",
-	"100100":"c",
-	"100110":"d",
-	"100010":"e",
-	"110100":"f",
-	"110110":"g",
-	"110010":"h",
-	"010100":"i",
-	"010110":"j",
-	"101000":"k",
-	"111000":"l",
-	"101100":"m",
-	"101110":"n",
-	"101010":"o",
-	"111100":"p",
-	"111110":"q",
-	"111010":"r",
-	"011100":"s",
-	"011110":"t",
-	"101001":"u",
-	"111001":"v",
-	"010111":"w",
-	"101101":"x",
-	"101111":"y",
-	"101011":"z",
 
-	"010000" : ",",
-	"011000" : ";",
-	"010010" : ":",
-	"010011" : ".",
-	"011010" : "!",
-	"011011" : "()", //add logic for brackets
-	"011001" : "?\"", //quote start // add logic for question marks and quotes
-	"001010" : "*",
-	"001011" : "\"", //quote end
-	"010000" : "\'",
-	"001001" : "-",
-	
-	//special tiles Meaning in caps
-	//space
-	"000000" : "SPACE",
-	//Capital Symbol
-	"000001" : "CAPS",
-	"001111":"NUMBER"
-
-}*/
-
+//#region
 let a =
 {   
     "id" : "100000",
@@ -290,39 +242,42 @@ let hyphen =
 }
 
 
-
+//#endregion
 
 
 // SPECIAL CHARACTERS
 let SPACE =
 {   
-    "id" : "000000"
-
+    "id" : "000000",
+    "character":"SPACE",
+    "special":"true"
 }
 let CAPS =
 {   
-    "id" : "000001"
+    "id" : "000001",
+    "character":"CAPS",
+    "special":"true"
+
     
 }
 
 let NUMBER =
-{   
-    "id" : "001111"
+{
+
+    "id" : "001111",
+    "character":"NUMBER",
+    "special":"true"
 
 }
 
 
 
 
+//alphabet
+var lookupParser = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z]
+//punctuation
+lookupParser.push(comma,semicolon,colon,fullstop,exclimation,brackets,questionmark,astrix,backslash,hyphen)
+//special
+lookupParser.push(SPACE,CAPS,NUMBER)
 
-var lookup = []
-
-lookup.push(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z)
-
-console.log(lookup)
-console.log(lookup[2])
-console.log(lookup[2].id)
-console.log(lookup[2].character)
-console.log(lookup[2].uppercase)
-console.log(lookup[2].number)
 

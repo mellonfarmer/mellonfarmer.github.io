@@ -12,9 +12,10 @@ function includeScript(Source)
 
 }
 
-includeScript('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js');
+//includeScript('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js');
 includeScript('./scripts/parser.js');
 includeScript('./scripts/processing.js');
+//includeScript('./scripts/brailleTiles.js');
 
 
 

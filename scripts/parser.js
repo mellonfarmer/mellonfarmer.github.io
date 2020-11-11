@@ -310,6 +310,15 @@ let bt_NUMBER =
     "special":"true"
 
 }
+let bt_ITALICS =
+{   
+	"id" : "000101",
+	"number":".",
+    "character": ",",
+    "uppercase": ","
+}
+
+
 let bt_undefined_handler =
 {
 	"id" : "undefined",
@@ -325,11 +334,10 @@ let bt_undefined_handler =
 var lookupParser = [bt_a, bt_b, bt_c, bt_d, bt_e, bt_f, bt_g, bt_h, bt_i, bt_j, bt_k, bt_l, bt_m, bt_n, bt_o, bt_p, bt_q, bt_r, bt_s, bt_t, bt_u, bt_v, bt_w, bt_x, bt_y, bt_z]
 //punctuation
 lookupParser.push(bt_comma, bt_semicolon, bt_colon, bt_fullstop, bt_exclimation, bt_brackets, bt_questionmark, bt_astrix, bt_backslash, bt_hyphen)
+//concat~
 lookupParser.push(bt_and,bt_of,bt_for,bt_the,bt_with)
-
-
 //special
-lookupParser.push(bt_SPACE, bt_CAPS, bt_NUMBER, bt_undefined_handler)
+lookupParser.push(bt_SPACE, bt_CAPS, bt_NUMBER, bt_ITALICS, bt_undefined_handler)
 
 
 

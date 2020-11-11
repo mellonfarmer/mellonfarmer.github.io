@@ -1,0 +1,7 @@
+add a copy previous button
+fix the get binary tick box
+update the graphics center the tiles, add a banner, add a footer, style up the buttons, optinal submit button rather tahn real time
+add the word to braille convert option
+braille unicode output
+
+move parser switch operations to indivigual functions

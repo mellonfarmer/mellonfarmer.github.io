@@ -3,7 +3,6 @@
 	//width: 142px;
 	//height: 215px;
 	//margin-left: 46%;
-	margin-top: 10%;
 	display: flex;
 }
         
@@ -11,8 +10,8 @@
 {
 	width: 90px;
     height: 135px;
-    margin-left: 1%;
-    margin-top: 1%;
+    margin-left: 16px;
+    margin-top: 16px;
     border-style: solid;
     border-color: #334142;
     border-radius: 25px;

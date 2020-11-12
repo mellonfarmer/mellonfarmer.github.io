@@ -8,8 +8,8 @@ function includeScript(Source)
 }
 
 includeScript('./scripts/parser.js');
+includeScript('./scripts/processing.js');
 
-//var text = "";
 var activeTiles = [];
 
 class tile{
@@ -106,40 +106,10 @@ function updateText(text)
 {
 	$("#lblOutput").text(text);
 }
-/*
-//remove
-function textLookup(dotinput)
-{
-	text = "";
-	letterCheck = lookup[dotinput];
-	if (letterCheck == undefined){
-		text = text;
-	}else
-	{
-		text = text + letterCheck;
-	}
-
-	return text
-}
-
-//remove
-function getActiveDotsForCurrentTile(tileId)
-{	
-	//get active dots for current tile and convert active to numbers
-	
-	var activeDotsInCurrentTileSet = "";
-	
-	for (var y = 0;y <= 5;y++)
-	{
-		if (activeTiles[tileId].getactiveDots(y) == true)
-			activeDotsInCurrentTileSet = activeDotsInCurrentTileSet + y; //+ y + " ";
-	}
 
 
-	return activeDotsInCurrentTileSet
-}
 
-*/
+
 //keep possibly add to the class
 function getActiveDotsForCurrentTileBinary(tileId)
 {	
@@ -162,48 +132,11 @@ function getActiveDotsForCurrentTileBinary(tileId)
 		}
 	}
 
-
 	return activeDotsInCurrentTileSet
 }
 
 
-/*
-//remove
-function getAllActiveDots()
-{
-	var returnText =""
-	for (var i = 0; i <= activeTiles.length -1 ; i++) 
-	{
-		returnText += textLookup(getActiveDotsForCurrentTile(i));
 
-	}
-	updateText(returnText);
-}
-*/
-/*
-//remove
-function getAllDotValues()
-{	
-	text = "";
-	//get tile id, get dot array, output to a string
-	for (var i = 0; i <= activeTiles.length -1 ; i++) {
-		var activeDotsInCuttentTile = "";
-
-		for (var y = 0;y <= 5;y++){
-			if (activeTiles[i].getactiveDots(y) == true)
-				activeDotsInCuttentTile = activeDotsInCuttentTile + y; //+ y + " ";
-		}
-		letterCheck = lookup[activeDotsInCuttentTile];
-		
-		text = activeDotsInCuttentTile;
-		
-		
-		
-	}
-	
-	$("#lblOutput").text(text);
-}
-*/
 //keep
 function getDotBinary()
 {
@@ -218,7 +151,6 @@ function getDotBinary()
 
 	}
 	return returnText
-	updateText(returnText);
 
 }
 
@@ -227,15 +159,11 @@ function checkboxUpdate()
 {
 	if($("#dbgGetDpts").is(":checked"))
 	{
-		//getAllDotValues();
-		updatetext(getDotBinary());
+		updateText(getDotBinary());
 	}
 	else
 	{
-		//var binaryString = 
 		updateText(mainProcess(getDotBinary()))
-		//mainProcess(getDotBinary)
-		//getAllActiveDots()
 	}
 
 }

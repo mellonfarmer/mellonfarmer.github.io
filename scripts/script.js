@@ -1,8 +1,3 @@
-/*var script = document.createElement('script');
-script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js';
-script.type = 'text/javascript';
-document.getElementsByTagName('head')[0].appendChild(script);
-*/
 function includeScript(Source)
 {
 	var script = document.createElement('script');
@@ -12,66 +7,9 @@ function includeScript(Source)
 
 }
 
-//includeScript('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js');
 includeScript('./scripts/parser.js');
-includeScript('./scripts/processing.js');
-//includeScript('./scripts/brailleTiles.js');
 
-
-
-let lookup = {
-	"0" : "a",
-	"01" : "b",
-	"03" : "c",
-	"034" : "d",
-	"04" : "e",
-	"013" : "f",
-	"0134" : "g",
-	"014" : "h",
-	"13" : "i",
-	"134" : "j",
-
-	"02" : "k",
-	"012" : "l",
-	"023" : "m",
-	"0234" : "n",
-	"024" : "o",
-	"0123" : "p",
-	"01234" : "q",
-	"0124" : "r",
-	"123" : "s",
-	"1234" : "t",
-
-	"025" : "u",
-	"0125" : "v",
-	"1345" : "w",
-	"0235" : "x",
-	"02345" : "y",
-	"0245" : "z",
-
-	
-	"1" : ",",
-	"12" : ";",
-	"14" : ":",
-	"145" : ".",
-	"124" : "!",
-	"1245" : "()",
-	"125" : "?\"", //quote start
-	"24" : "*",
-	"245" : "\"", //quote end
-	"2" : "\'",
-	"25" : "-",
-
-
-
-
-
-	"" : " "
-
-
-}
-
-var text = "";
+//var text = "";
 var activeTiles = [];
 
 class tile{
@@ -168,7 +106,7 @@ function updateText(text)
 {
 	$("#lblOutput").text(text);
 }
-
+/*
 //remove
 function textLookup(dotinput)
 {
@@ -201,7 +139,7 @@ function getActiveDotsForCurrentTile(tileId)
 	return activeDotsInCurrentTileSet
 }
 
-
+*/
 //keep possibly add to the class
 function getActiveDotsForCurrentTileBinary(tileId)
 {	
@@ -229,7 +167,7 @@ function getActiveDotsForCurrentTileBinary(tileId)
 }
 
 
-
+/*
 //remove
 function getAllActiveDots()
 {
@@ -241,8 +179,8 @@ function getAllActiveDots()
 	}
 	updateText(returnText);
 }
-
-
+*/
+/*
 //remove
 function getAllDotValues()
 {	
@@ -265,7 +203,7 @@ function getAllDotValues()
 	
 	$("#lblOutput").text(text);
 }
-
+*/
 //keep
 function getDotBinary()
 {
@@ -290,7 +228,7 @@ function checkboxUpdate()
 	if($("#dbgGetDpts").is(":checked"))
 	{
 		//getAllDotValues();
-		getDotBinary();
+		updatetext(getDotBinary());
 	}
 	else
 	{

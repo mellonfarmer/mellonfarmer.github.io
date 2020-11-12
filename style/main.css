@@ -1,9 +1,14 @@
 #mainContainer
 {
+	/*
 	//width: 142px;
 	//height: 215px;
 	//margin-left: 46%;
-	display: flex;
+	*/
+	display: -webkit-box;
+	text-align: center;
+	overflow:auto;
+	
 }
         
 .Braille-container
@@ -16,6 +21,7 @@
     border-color: #334142;
     border-radius: 25px;
 	/* top: 60px; */
+	margin: auto;
 }
 .Braille-dot
 {
@@ -34,9 +40,62 @@
     height: 9%;
     width: 25%;
     margin-top: 50px;
-    margin-left: 40%;
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+	text-align: center;
+	
    
 }
+/*
 #textOutput h1
 {
+}
+*/
+.button
+{
+	background-color: #000000;
+	color: #ffffff;
+	border-radius: 1000px;
+	height: 100px;
+	width: 100px;
+	text-align: center;
+	margin: auto;
+	user-select: none;
+	font-size: 85px;
+	border-style: none;
+
+}
+#buttonSpacer
+{
+	height: 110px;
+    width: 110px;
+    margin: auto;
+    display: flex;
+
+}
+/*
+.button:hover
+{
+	height: 100px;
+	width: 100px;
+	border-style: none;
+	font-size: 100px;
+}
+*/
+.button:active
+{
+	background-color: #167715e6;
+	/*
+	border-style: outset;
+	height: 120px;
+	width: 120px;
+	border-style: none;
+	font-size: 100px;
+	*/
+}
+
+#buttonContainer
+{
+	display: flex;
+
+}

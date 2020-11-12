@@ -1,14 +1,13 @@
 #mainContainer
 {
 	/*
-	//width: 142px;
-	//height: 215px;
-	//margin-left: 46%;
-	*/
 	display: -webkit-box;
+	*/
+	display: block;
 	text-align: center;
 	overflow:auto;
-	
+	height:70%;
+
 }
         
 .Braille-container
@@ -98,4 +97,13 @@
 {
 	display: flex;
 
+}
+
+.layertest
+{
+	height: 155px;
+	background-color: rgba(255, 238, 0, 0.638);
+	width:100%;
+	display: -webkit-box;
+	
 }

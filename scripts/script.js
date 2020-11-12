@@ -21,15 +21,14 @@ class tile{
 		this.tileId = activeTiles.length;
 		this.drawTile();
 	}
-	//tileId = activeTiles.length;
-	//activeDots = [false,false,false,false,false,false];
+
 	getTileId()
 	{
 		return this.tileId;
 	}
 
 	drawTile()
-	{//activeTiles[this.tileId].setDots(1);
+	{
 	    	$("#mainContainer").append("<div class=\"Braille-container\" id=\""+this.tileId+"\">  \
 	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-1\" onclick=\"activeTiles["+this.tileId+"].setDots(1)\"></div>\
 	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-4\" onclick=\"activeTiles["+this.tileId+"].setDots(4)\"></div>\
@@ -40,21 +39,29 @@ class tile{
 	    	);
 	}
 
-	getactiveDots(dotId)
+	getactiveDots()
 	{
-		if (dotId !== ""){
-			return this.activeDots[dotId];
-		}
-		else
-		{
-			return this.activeDots;
-		}
+		let dotArray = ""
+		this.activeDots.forEach(element => {
+			if (element == true)
+			{
+				dotArray = dotArray + "1";
+			
+			}
+			else
+			{
+				dotArray = dotArray + "0";
+
+			}
+		});
+		
+		return dotArray
 	}
 
 
 	setDots(dotID)
 	{
-			//let fullPath = ("#Braille-dot-id-" + this.tileid + "-"+ dotID);
+			
 
 		if($("#Braille-dot-id-" + this.tileId + "-"+ dotID).css("background-color") == 'rgb(255, 255, 255)')
 		{
@@ -62,7 +69,6 @@ class tile{
 			this.activeDots[(dotID-1)] = true;
 
 			checkboxUpdate()
-			//console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
 		} 
 
 		else if($("#Braille-dot-id-" + this.tileId + "-"+ dotID).css("background-color") == 'rgb(0, 0, 0)')
@@ -71,8 +77,7 @@ class tile{
 			this.activeDots[(dotID-1)] = false;
 
 			checkboxUpdate()
-			//getAllDotsInSet();
-			//console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
+			
 		}
 
 	}
@@ -97,9 +102,7 @@ function removeTile()
 
 function addTile()
 {
-	// activeTiles[1] = new tile;
 	activeTiles.push(new tile);
-
 }
 
 function updateText(text)
@@ -108,36 +111,6 @@ function updateText(text)
 }
 
 
-
-
-//keep possibly add to the class
-function getActiveDotsForCurrentTileBinary(tileId)
-{	
-	//get active dots for current tile and convert active to numbers
-	
-	var activeDotsInCurrentTileSet = "";
-	
-	for (var y = 0;y <= 5;y++)
-	{
-		if (activeTiles[tileId].getactiveDots(y) == true)
-		{
-			activeDotsInCurrentTileSet = activeDotsInCurrentTileSet + "1";
-			 //+ y + " ";
-		}
-		else
-		{
-			activeDotsInCurrentTileSet = activeDotsInCurrentTileSet + "0";
-
-
-		}
-	}
-
-	return activeDotsInCurrentTileSet
-}
-
-
-
-//keep
 function getDotBinary()
 {
 	//get all the dot values as a binary string and output to text box
@@ -147,10 +120,17 @@ function getDotBinary()
 	var returnText =""
 	for (var i = 0; i <= activeTiles.length -1 ; i++) 
 	{
-		returnText += getActiveDotsForCurrentTileBinary(i);
+		returnText += activeTiles[i].getactiveDots();
 
 	}
 	return returnText
+
+}
+
+function addLayer()
+{
+
+	$("#mainContainer").append("<div class=\"layerTest\">" );
 
 }
 

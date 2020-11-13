@@ -1,0 +1,5 @@
+give it a letter > checks the lookup > creates the tile > populates the dots
+
+lookup object via letter
+build the string in binary
+foreach tile run create a tile with the dots set, adding it via normal process

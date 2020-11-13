@@ -15,12 +15,12 @@ var arrBrailleLayer = 0;
 
 class tile{
 	//give id
-	constructor()
+	constructor(layerID)
 	{
 		this.activeDots = [false,false,false,false,false,false];
 		//change to count active tiles rather than rely on the array length
 		this.tileId = arrActiveTiles.length;
-		this.drawTile(0);
+		this.drawTile(layerID);
 	}
 
 	getTileId()
@@ -120,10 +120,15 @@ function addTile()
 
 function getCurrentLayer()
 {
-	var currentLayer = arrBrailleLayer.length
+	var currentLayer = arrBrailleLayer
 	return currentLayer
 }
+function addLayer()
+{
+	arrBrailleLayer++;
+	$("#mainContainer").append("<div class=\"BrailleLayer\" id=\""+arrBrailleLayer+"\">" );
 
+}
 
 function updateText(text)
 {
@@ -147,12 +152,7 @@ function getDotBinary()
 
 }
 
-function addLayer()
-{
-	arrBrailleLayer++;
-	$("#mainContainer").append("<div class=\"BrailleLayer\">" );
 
-}
 /*
 function removeLayer()
 {

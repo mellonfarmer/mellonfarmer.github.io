@@ -10,51 +10,60 @@ function includeScript(Source)
 includeScript('./scripts/parser.js');
 includeScript('./scripts/processing.js');
 
-var activeTiles = [];
+var arrActiveTiles = [];
+var arrBrailleLayer = 0;
 
 class tile{
 	//give id
-	constructor()
+	constructor(layerID)
 	{
 		this.activeDots = [false,false,false,false,false,false];
 		//change to count active tiles rather than rely on the array length
-		this.tileId = activeTiles.length;
-		this.drawTile();
+		this.tileId = arrActiveTiles.length;
+		this.drawTile(layerID);
 	}
-	//tileId = activeTiles.length;
-	//activeDots = [false,false,false,false,false,false];
+
 	getTileId()
 	{
 		return this.tileId;
 	}
 
-	drawTile()
-	{//activeTiles[this.tileId].setDots(1);
-	    	$("#mainContainer").append("<div class=\"Braille-container\" id=\""+this.tileId+"\">  \
-	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-1\" onclick=\"activeTiles["+this.tileId+"].setDots(1)\"></div>\
-	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-4\" onclick=\"activeTiles["+this.tileId+"].setDots(4)\"></div>\
-	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-2\" onclick=\"activeTiles["+this.tileId+"].setDots(2)\"></div>\
-	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-5\" onclick=\"activeTiles["+this.tileId+"].setDots(5)\"></div>\
-	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-3\" onclick=\"activeTiles["+this.tileId+"].setDots(3)\"></div>\
-	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-6\" onclick=\"activeTiles["+this.tileId+"].setDots(6)\"></div>"
+	//now needs to draw to current layer
+	drawTile(layerID)
+	{
+	    	$("#"+layerID+".BrailleLayer").append("<div class=\"Braille-container\" id=\""+this.tileId+"\">  \
+	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-1\" onclick=\"arrActiveTiles["+this.tileId+"].setDots(1)\"></div>\
+	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-4\" onclick=\"arrActiveTiles["+this.tileId+"].setDots(4)\"></div>\
+	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-2\" onclick=\"arrActiveTiles["+this.tileId+"].setDots(2)\"></div>\
+	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-5\" onclick=\"arrActiveTiles["+this.tileId+"].setDots(5)\"></div>\
+	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-3\" onclick=\"arrActiveTiles["+this.tileId+"].setDots(3)\"></div>\
+	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-6\" onclick=\"arrActiveTiles["+this.tileId+"].setDots(6)\"></div>"
 	    	);
 	}
 
-	getactiveDots(dotId)
+	getactiveDots()
 	{
-		if (dotId !== ""){
-			return this.activeDots[dotId];
-		}
-		else
-		{
-			return this.activeDots;
-		}
+		let dotArray = ""
+		this.activeDots.forEach(element => {
+			if (element == true)
+			{
+				dotArray = dotArray + "1";
+			
+			}
+			else
+			{
+				dotArray = dotArray + "0";
+
+			}
+		});
+		
+		return dotArray
 	}
 
 
 	setDots(dotID)
 	{
-			//let fullPath = ("#Braille-dot-id-" + this.tileid + "-"+ dotID);
+			
 
 		if($("#Braille-dot-id-" + this.tileId + "-"+ dotID).css("background-color") == 'rgb(255, 255, 255)')
 		{
@@ -62,7 +71,6 @@ class tile{
 			this.activeDots[(dotID-1)] = true;
 
 			checkboxUpdate()
-			//console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
 		} 
 
 		else if($("#Braille-dot-id-" + this.tileId + "-"+ dotID).css("background-color") == 'rgb(0, 0, 0)')
@@ -71,8 +79,7 @@ class tile{
 			this.activeDots[(dotID-1)] = false;
 
 			checkboxUpdate()
-			//getAllDotsInSet();
-			//console.log("Array contence: " + activeDots[(dotID-1)] + "Dot number " + dotID);
+			
 		}
 
 	}
@@ -82,23 +89,44 @@ function removeTile()
 {
 	
 	//get current tile id
-	var ElementToRemove = "#" +( activeTiles.length -1 );
+	var ElementToRemove = "#" +( arrActiveTiles.length -1 );
 
 	//remove element
 	$(ElementToRemove).remove();
 
 	//remove id from array	
-	delete activeTiles[activeTiles.length];
-	activeTiles.pop();	
+	delete arrActiveTiles[arrActiveTiles.length];
+	arrActiveTiles.pop();	
 
 	//refresh text
 	checkboxUpdate();
 }
 
+
+//add layer handler 
+//rules for layer
+//when it gets to 18 tiles add a new layer
+//when tiles are deleted below 18 delete the layer and return to the previous layer
+//when it goes up again past 18 add new layer back
+//active tiles array is left as is for now, this will only affect teh interface
+
+
 function addTile()
 {
-	// activeTiles[1] = new tile;
-	activeTiles.push(new tile);
+	//change to add Braillelayer value and handle tile changes
+
+	arrActiveTiles.push(new tile(getCurrentLayer()));
+}
+
+function getCurrentLayer()
+{
+	var currentLayer = arrBrailleLayer
+	return currentLayer
+}
+function addLayer()
+{
+	arrBrailleLayer++;
+	$("#mainContainer").append("<div class=\"BrailleLayer\" id=\""+arrBrailleLayer+"\">" );
 
 }
 
@@ -108,36 +136,6 @@ function updateText(text)
 }
 
 
-
-
-//keep possibly add to the class
-function getActiveDotsForCurrentTileBinary(tileId)
-{	
-	//get active dots for current tile and convert active to numbers
-	
-	var activeDotsInCurrentTileSet = "";
-	
-	for (var y = 0;y <= 5;y++)
-	{
-		if (activeTiles[tileId].getactiveDots(y) == true)
-		{
-			activeDotsInCurrentTileSet = activeDotsInCurrentTileSet + "1";
-			 //+ y + " ";
-		}
-		else
-		{
-			activeDotsInCurrentTileSet = activeDotsInCurrentTileSet + "0";
-
-
-		}
-	}
-
-	return activeDotsInCurrentTileSet
-}
-
-
-
-//keep
 function getDotBinary()
 {
 	//get all the dot values as a binary string and output to text box
@@ -145,15 +143,35 @@ function getDotBinary()
 	//get all the dots in the acriveTiles array
 
 	var returnText =""
-	for (var i = 0; i <= activeTiles.length -1 ; i++) 
+	for (var i = 0; i <= arrActiveTiles.length -1 ; i++) 
 	{
-		returnText += getActiveDotsForCurrentTileBinary(i);
+		returnText += arrActiveTiles[i].getactiveDots();
 
 	}
 	return returnText
 
 }
 
+
+/*
+function removeLayer()
+{
+
+	var ElementToRemove = "#" +(arrBrailleLayer);
+
+	//remove element
+	$(ElementToRemove).remove();
+
+
+	arrBrailleLayer--;
+
+
+
+
+	//$("#mainContainer").append("<div class=\"BrailleLayer\">" );
+
+}
+*/
 //-----------HTML Events---------------
 function checkboxUpdate()
 {

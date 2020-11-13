@@ -8,9 +8,10 @@
 
 
   <body onload = "addTile()">
-       <div id="mainContainer">
-        </div> 
-
+      <div id="mainContainer">
+        <div class="BrailleLayer" id="0"></div>
+      </div> 
+        
         
 
 
@@ -20,11 +21,19 @@
           <label id="lblOutput"></label>
         </h1>
       </div>
-      <button onclick="addTile()">Add tile</button>
-      <button onclick="removeTile()">delete last</button>
+      <div id="buttonContainer">
+        <div id="buttonSpacer">
+          <div class ="button" onclick="addTile()">+</div>
+        </div>
+        <div id="buttonSpacer">
+          <div class ="button" onclick="removeTile()">De</div>
+        </div>
+
+      </div>
 
 
       <input type="checkbox" name="DebugGetDots" id ="dbgGetDpts" onclick="checkboxUpdate()"><label for="GetDots">Get Dots</label>
+      <button onclick="addLayer()">add test</button>
   </body>
 
 </html>

@@ -16,13 +16,15 @@
 	width: 90px;
 	height: 135px;
 	background-color: white;
-    margin-left: 16px;
-    margin-top: 16px;
+	margin-left: 1.938px;
+    margin-right: 1.938px;
+    margin-top: 7px;
+    margin-bottom: 7px;
     border-style: solid;
     border-color: black;
     border-radius: 25px;
-	/* top: 60px; */
-	margin: auto;
+	/* top: 60px; 
+	margin: auto;*/
 
 /* smaller tiles and dots
 	width: 76px;
@@ -56,13 +58,14 @@
 #textOutput
 {
 	border-style: solid;
-    height: 9%;
-    width: 25%;
-    margin-top: 50px;
+	height: 86px;
+    width: 100%;
+    margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
 	text-align: center;
-	
+	height: 86px;
+
    
 }
 /*

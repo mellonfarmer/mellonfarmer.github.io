@@ -10,7 +10,8 @@ function includeScript(Source)
 includeScript('./scripts/parser.js');
 includeScript('./scripts/processing.js');
 
-var activeTiles = [];
+var arrActiveTiles = [];
+var arrBrailleLayer = 0;
 
 class tile{
 	//give id
@@ -18,8 +19,8 @@ class tile{
 	{
 		this.activeDots = [false,false,false,false,false,false];
 		//change to count active tiles rather than rely on the array length
-		this.tileId = activeTiles.length;
-		this.drawTile();
+		this.tileId = arrActiveTiles.length;
+		this.drawTile(0);
 	}
 
 	getTileId()
@@ -27,9 +28,10 @@ class tile{
 		return this.tileId;
 	}
 
-	drawTile()
+	//now needs to draw to current layer
+	drawTile(layerID)
 	{
-	    	$("#mainContainer").append("<div class=\"Braille-container\" id=\""+this.tileId+"\">  \
+	    	$("#"+layerID+".BrailleLayer").append("<div class=\"Braille-container\" id=\""+this.tileId+"\">  \
 	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-1\" onclick=\"activeTiles["+this.tileId+"].setDots(1)\"></div>\
 	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-4\" onclick=\"activeTiles["+this.tileId+"].setDots(4)\"></div>\
 	    	<div class=\"Braille-dot\" id=\"Braille-dot-id-"+ this.tileId + "-2\" onclick=\"activeTiles["+this.tileId+"].setDots(2)\"></div>\
@@ -87,23 +89,41 @@ function removeTile()
 {
 	
 	//get current tile id
-	var ElementToRemove = "#" +( activeTiles.length -1 );
+	var ElementToRemove = "#" +( arrActiveTiles.length -1 );
 
 	//remove element
 	$(ElementToRemove).remove();
 
 	//remove id from array	
-	delete activeTiles[activeTiles.length];
-	activeTiles.pop();	
+	delete arrActiveTiles[arrActiveTiles.length];
+	arrActiveTiles.pop();	
 
 	//refresh text
 	checkboxUpdate();
 }
 
+
+//add layer handler 
+//rules for layer
+//when it gets to 18 tiles add a new layer
+//when tiles are deleted below 18 delete the layer and return to the previous layer
+//when it goes up again past 18 add new layer back
+//active tiles array is left as is for now, this will only affect teh interface
+
+
 function addTile()
 {
-	activeTiles.push(new tile);
+	//change to add Braillelayer value and handle tile changes
+
+	arrActiveTiles.push(new tile(getCurrentLayer()));
 }
+
+function getCurrentLayer()
+{
+	var currentLayer = arrBrailleLayer.length
+	return currentLayer
+}
+
 
 function updateText(text)
 {
@@ -118,9 +138,9 @@ function getDotBinary()
 	//get all the dots in the acriveTiles array
 
 	var returnText =""
-	for (var i = 0; i <= activeTiles.length -1 ; i++) 
+	for (var i = 0; i <= arrActiveTiles.length -1 ; i++) 
 	{
-		returnText += activeTiles[i].getactiveDots();
+		returnText += arrActiveTiles[i].getactiveDots();
 
 	}
 	return returnText
@@ -129,11 +149,29 @@ function getDotBinary()
 
 function addLayer()
 {
-
-	$("#mainContainer").append("<div class=\"layerTest\">" );
+	arrBrailleLayer++;
+	$("#mainContainer").append("<div class=\"BrailleLayer\">" );
 
 }
+/*
+function removeLayer()
+{
 
+	var ElementToRemove = "#" +(arrBrailleLayer);
+
+	//remove element
+	$(ElementToRemove).remove();
+
+
+	arrBrailleLayer--;
+
+
+
+
+	//$("#mainContainer").append("<div class=\"BrailleLayer\">" );
+
+}
+*/
 //-----------HTML Events---------------
 function checkboxUpdate()
 {

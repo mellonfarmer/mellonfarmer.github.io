@@ -179,7 +179,9 @@ let bt_comma =
 {   
     "id" : "010000",
     "character": ",",
-    "uppercase": ","
+	"uppercase": ",",
+	"number":","
+	
 }
 let bt_semicolon =
 {   
@@ -197,7 +199,8 @@ let bt_fullstop =
 {   
     "id" : "010011",
     "character": ".",
-    "uppercase": "."
+	"uppercase": ".",
+	"number":"."
 }
 let bt_exclimation =
 {   
@@ -307,7 +310,8 @@ let bt_NUMBER =
     "id" : "001111",
 	"name":"NUMBER",
 	"character":"",
-    "special":"true"
+	"special":"true",
+	"number":""
 
 }
 let bt_ITALICS =
@@ -327,7 +331,13 @@ let bt_undefined_handler =
     "special":"true"
 
 }
-
+let bt_NUMERIC_SPACE =
+{   
+	"id" : "000010",
+	"number":" ",
+    "character": "",
+    "uppercase": ""
+}
 
 
 //alphabet
@@ -337,7 +347,7 @@ lookupParser.push(bt_comma, bt_semicolon, bt_colon, bt_fullstop, bt_exclimation,
 //concat~
 lookupParser.push(bt_and,bt_of,bt_for,bt_the,bt_with)
 //special
-lookupParser.push(bt_SPACE, bt_CAPS, bt_NUMBER, bt_ITALICS, bt_undefined_handler)
+lookupParser.push(bt_SPACE, bt_CAPS, bt_NUMBER, bt_ITALICS, bt_undefined_handler,bt_NUMERIC_SPACE)
 
 
 
@@ -400,6 +410,7 @@ function inputToArray(input)
 var isFlagSet = false
 var isCaps = false
 var isNumber = false
+
 // --- parser functions --- //
 function processString(inputArray)
 {
@@ -415,6 +426,7 @@ function processString(inputArray)
 		let currentTile = inputArray[i];
 		let nextTile = inputArray[i+1];
 		try{
+			//change to assign nextLetterCheck value to LetterCheck so we're only running the compare on the parser array once
 		letterCheck = lookupParser.find(element => element.id == currentTile);
 		//scan ahead for the next letter
 		nextLetterCheck = lookupParser.find(element => element.id == nextTile);
@@ -424,8 +436,9 @@ function processString(inputArray)
 		}
 		if(letterCheck !== undefined){
 			switch (letterCheck.id) { //switch sets the flags
-				case "000001": //captial
-					if (Boolean(isCaps) == false)
+
+				case "000001": //captial identifier
+					if (Boolean(isCaps) == false) //if isCaps == true continue untill the caps flag is set to false via terminator
 					{
 						if(nextLetterCheck !== undefined){
 						//look ahead to see if the next tile is a caps symbol
@@ -434,8 +447,10 @@ function processString(inputArray)
 								isCaps = true
 								isFlagSet = true
 								i++
-							}// if caps is true for the next tile set the falg, the fi will continue to write in caps untill the flag is turned off
-							else //if the character ahead is special it will be capitalised, way round is to set a special flag in the object, need to set up objects for the tiles next
+							}
+							// if caps is true for the next tile set the falg, the fi will continue to write in caps untill the flag is turned off
+							//if the character ahead is special it will be capitalised, way round is to set a special flag in the object, need to set up objects for the tiles next
+							else
 							{
 
 								text = text + nextLetterCheck.uppercase;
@@ -454,49 +469,67 @@ function processString(inputArray)
 					}
 				break;
 
-					/*
-				case "001111": //number
+					
+				case "001111": //number identifier
+				/*
+				number logic
+				//numeric indicator is "001111" 
+				//numbers are terminated by anyhting other than numbers, periods, commas, simple fraction lines and line continuation indicators p.34 'learn brallie book'
+				//mixing numbers with letters, dot 56 (000011) is the lowercase  number terminator when working with numbers and words eg "text2.txt" p33 for a better example
+				// dot 6 (000001) is the capital indicator
+				//numbers with spaces dot 5 (000010) is used to space numbers eg 123 456 789, mostly used with credit cards
+				// dot 5 is also used to indicate a new line for large numbers
+				*/
+
 					if (Boolean(isNumber)== false)
 					{
 						if(nextLetterCheck !== undefined)
 						{
-							//look ahead to see if the next tile is a caps symbol
-							if(nextLetterCheck.id == "001111")
+							//check for number identifier and set flag if true
+							if(letterCheck.id == "001111")
 							{
 								isNumber = true
 								isFlagSet = true
-								i++
-							}// if caps is true for the next tile set the falg, the fi will continue to write in caps untill the flag is turned off
-							else //if the character ahead is special it will be capitalised, way round is to set a special flag in the object, need to set up objects for the tiles next
+								//i++
+							}
+							//check if the next tile has a number value defined, if not unset the flag
+							if (nextLetterCheck.number == undefined)
 							{
-
-								text = text + nextLetterCheck.number;
+								isNumber = false
+								isFlagSet = false
 								i++
+
 							}
 						}
 
-					}else
-					{
-
+					}
+					else //if isNumber == true
+					{	
+						/*
 						if (Boolean(isFlagSet)== false)
 						{
 							//text = text + bpCapital(letterCheck);
 							text = text + letterCheck.number;
 						}
+						*/
+
+						//look ahead to see if the next tile is a number terminator
+						
+						
+
+						
 					}
 				break;
-				*/
+				
 
 				case "000000": //space
+				//space is used as a terminator for most indicators
 					//clear all flags
 					isCaps = false
-					// return a space to the text processor
-					//if (Boolean(isFlagSet)== false)
-					//{
+					isNumber = false
 					
 					text = text + " "
 					
-					//}
 					isFlagSet = false
 				break;
 
@@ -507,9 +540,25 @@ function processString(inputArray)
 
 				default:
 					//check for flags set above
+
+					//change into a function to process all the rules, not using if statements
 					if(Boolean(isCaps) == true)
 					{
 						text = text + letterCheck.uppercase;
+					}
+					else if(isNumber == true)
+					{
+						if (letterCheck.number !== undefined)
+						{
+							text = text + letterCheck.number;
+						}
+						else
+						{
+							isNumber = false
+							text = text + letterCheck.character
+
+						}
+					 	
 					}
 					else
 					{
@@ -523,6 +572,8 @@ function processString(inputArray)
 
 	return text
 }
+
+
 
 //remove
 function bpCapital(letter)

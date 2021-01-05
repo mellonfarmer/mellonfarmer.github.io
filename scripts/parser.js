@@ -413,6 +413,12 @@ var isCapsDouble =false
 var isNumber = false
 
 // --- parser functions --- //
+function getTileInformation(tile)
+{
+	return lookupParser.find(element => element.id == tile)
+}
+
+
 
 //split into functions, one to get the current and next tile, one to process the special tiles/indicators, one to process the flags/indicators, one to output the text
 function processString(inputArray)
@@ -422,22 +428,18 @@ function processString(inputArray)
 	
 
 	var text = "";
-	let currentTileValue = "";
-
+	
 	//inputArray.forEach(element => {
 	for (let i = 0; i < inputArray.length; i++)
 	{
 		//split into function
-
-		let currentTile = inputArray[i];
-		let nextTile = inputArray[i+1];
 	
 		try
 		{
 			//change to assign nextTileValue value to currentTileValue so we're only running the compare on the parser array once. add to the todo
-			currentTileValue = lookupParser.find(element => element.id == currentTile);
+			currentTileValue = getTileInformation(inputArray[i])
 			//scan ahead for the next letter
-			nextTileValue = lookupParser.find(element => element.id == nextTile);
+			nextTileValue = getTileInformation(inputArray[i+1])
 			//currentTileValue = lookupParser[inputArray[i]];
 		}
 		catch(e)
@@ -470,15 +472,7 @@ function processString(inputArray)
 							}
 						}
 					}
-					//else
-					//{
 
-					//	if (Boolean(isFlagSet)== false)
-				//		{
-				//			//text = text + bpCapital(currentTileValue);
-				//			text = text + currentTileValue.uppercase;
-				//		}
-				//	}
 				break;
 
 					

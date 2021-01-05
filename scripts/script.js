@@ -100,6 +100,7 @@ function removeTile()
 
 	//refresh text
 	checkboxUpdate();
+	$("#tileCount").text(getTileCount())
 }
 
 
@@ -116,6 +117,7 @@ function addTile()
 	//change to add Braillelayer value and handle tile changes
 
 	arrActiveTiles.push(new tile(getCurrentLayer()));
+	$("#tileCount").text(getTileCount())
 }
 
 function getCurrentLayer()
@@ -152,6 +154,11 @@ function getDotBinary()
 
 }
 
+function getTileCount()
+{
+
+	return arrActiveTiles.length
+}
 
 /*
 function removeLayer()

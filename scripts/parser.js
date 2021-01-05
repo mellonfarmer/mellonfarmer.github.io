@@ -412,6 +412,8 @@ var isCaps = false
 var isNumber = false
 
 // --- parser functions --- //
+
+//split into functions, one to get the current and next tile, one to process the special tiles/indicators, one to process the flags/indicators, one to output the text
 function processString(inputArray)
 {
     // lookupParser[inputArray[i+1].id] //returns id of the tile ahead one position in the array
@@ -419,30 +421,41 @@ function processString(inputArray)
 	
 
 	var text = "";
-	
+	let currentTileValue = "";
+
 	//inputArray.forEach(element => {
-	for (let i = 0; i < inputArray.length; i++) {
-		//const element = inputArray[i];
+	for (let i = 0; i < inputArray.length; i++)
+	{
+		//split into function
+
 		let currentTile = inputArray[i];
 		let nextTile = inputArray[i+1];
-		try{
-			//change to assign nextLetterCheck value to LetterCheck so we're only running the compare on the parser array once
-		letterCheck = lookupParser.find(element => element.id == currentTile);
-		//scan ahead for the next letter
-		nextLetterCheck = lookupParser.find(element => element.id == nextTile);
-		//letterCheck = lookupParser[inputArray[i]];
-		}catch(e){
+	
+		try
+		{
+			//change to assign nextTileValue value to currentTileValue so we're only running the compare on the parser array once. add to the todo
+			currentTileValue = lookupParser.find(element => element.id == currentTile);
+			//scan ahead for the next letter
+			nextTileValue = lookupParser.find(element => element.id == nextTile);
+			//currentTileValue = lookupParser[inputArray[i]];
+		}
+		catch(e)
+		{
 			console.log(e)
 		}
-		if(letterCheck !== undefined){
-			switch (letterCheck.id) { //switch sets the flags
+		//end function split
+
+		if(currentTileValue !== undefined)
+		{
+			switch (currentTileValue.id) //switch sets the flags based on the tile value, the flags are then processed later 
+			{ 
 
 				case "000001": //captial identifier
 					if (Boolean(isCaps) == false) //if isCaps == true continue untill the caps flag is set to false via terminator
 					{
-						if(nextLetterCheck !== undefined){
+						if(nextTileValue !== undefined){
 						//look ahead to see if the next tile is a caps symbol
-							if(nextLetterCheck.id == "000001")
+							if(nextTileValue.id == "000001")
 							{
 								isCaps = true
 								isFlagSet = true
@@ -453,7 +466,7 @@ function processString(inputArray)
 							else
 							{
 
-								text = text + nextLetterCheck.uppercase;
+								text = text + nextTileValue.uppercase;
 								i++
 							}
 						}
@@ -463,8 +476,8 @@ function processString(inputArray)
 
 						if (Boolean(isFlagSet)== false)
 						{
-							//text = text + bpCapital(letterCheck);
-							text = text + letterCheck.uppercase;
+							//text = text + bpCapital(currentTileValue);
+							text = text + currentTileValue.uppercase;
 						}
 					}
 				break;
@@ -481,19 +494,20 @@ function processString(inputArray)
 				// dot 5 is also used to indicate a new line for large numbers
 				*/
 
-					if (Boolean(isNumber)== false)
-					{
-						if(nextLetterCheck !== undefined)
+					//if (Boolean(isNumber)== false)
+					//{
+						if(nextTileValue !== undefined)
 						{
 							//check for number identifier and set flag if true
-							if(letterCheck.id == "001111")
-							{
+							//if(currentTileValue.id == "001111")
+							//{
 								isNumber = true
 								isFlagSet = true
+								isCaps = false
 								//i++
-							}
+							//}
 							//check if the next tile has a number value defined, if not unset the flag
-							if (nextLetterCheck.number == undefined)
+							if (nextTileValue.number == undefined)
 							{
 								isNumber = false
 								isFlagSet = false
@@ -502,14 +516,15 @@ function processString(inputArray)
 							}
 						}
 
-					}
-					else //if isNumber == true
-					{	
+					//}
+					//else //if isNumber == true
+					//{	
+					//	isCaps = false;
 						/*
 						if (Boolean(isFlagSet)== false)
 						{
-							//text = text + bpCapital(letterCheck);
-							text = text + letterCheck.number;
+							//text = text + bpCapital(currentTileValue);
+							text = text + currentTileValue.number;
 						}
 						*/
 
@@ -518,7 +533,7 @@ function processString(inputArray)
 						
 
 						
-					}
+					//}
 				break;
 				
 
@@ -535,6 +550,7 @@ function processString(inputArray)
 
 				case undefined:
 					//do nothing if character is undefined, still needs to update text(test)
+					//shouldnt be able to get here, but do nothing to the text just incase, this case statement can probably be deleted
 					text = text;
 					break;
 
@@ -544,25 +560,29 @@ function processString(inputArray)
 					//change into a function to process all the rules, not using if statements
 					if(Boolean(isCaps) == true)
 					{
-						text = text + letterCheck.uppercase;
+						//text = text + currentTileValue.uppercase;
+						text = buildString(text,currentTileValue.uppercase)
 					}
 					else if(isNumber == true)
 					{
-						if (letterCheck.number !== undefined)
+						if (currentTileValue.number !== undefined)
 						{
-							text = text + letterCheck.number;
+							//text = text + currentTileValue.number;
+							text = buildString(text,currentTileValue.number)
 						}
 						else
 						{
 							isNumber = false
-							text = text + letterCheck.character
-
+							//text = text + currentTileValue.character
+							text = buildString(text,currentTileValue.character)
 						}
 					 	
 					}
 					else
 					{
-						text = text + letterCheck.character
+						//text = text + currentTileValue.character
+						text = buildString(text,currentTileValue.character)
+
 					}
 					break;
 			}
@@ -573,18 +593,28 @@ function processString(inputArray)
 	return text
 }
 
-
-
-//remove
-function bpCapital(letter)
+function buildString(text, letter)
 {
-	//private finctin to convert to caps
-	let toConvert = letter.toUpperCase()
-	return toConvert
+
+	return text = text + letter
+
+}
+//rename
+function flagChecker()
+{
+//priority list so far:
+//1.numbers
+//2.caps
+//3 maybe space
+
+
+
 
 }
 
+
 //rename
+//parser entry point, takes the braille array and returns the translated text 
 function mainProcess(input)
 {
 	

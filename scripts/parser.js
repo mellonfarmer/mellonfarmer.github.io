@@ -408,7 +408,8 @@ function inputToArray(input)
 
 //flags
 var isFlagSet = false
-var isCaps = false
+var isCapsSingle = false
+var isCapsDouble =false
 var isNumber = false
 
 // --- parser functions --- //
@@ -451,13 +452,13 @@ function processString(inputArray)
 			{ 
 
 				case "000001": //captial identifier
-					if (Boolean(isCaps) == false) //if isCaps == true continue untill the caps flag is set to false via terminator
+					if (Boolean(isCapsSingle) || Boolean(isCapsDouble) == false) //if isCaps == true continue untill the caps flag is set to false via terminator
 					{
 						if(nextTileValue !== undefined){
 						//look ahead to see if the next tile is a caps symbol
 							if(nextTileValue.id == "000001")
 							{
-								isCaps = true
+								isCapsDouble = true
 								isFlagSet = true
 								i++
 							}
@@ -465,21 +466,19 @@ function processString(inputArray)
 							//if the character ahead is special it will be capitalised, way round is to set a special flag in the object, need to set up objects for the tiles next
 							else
 							{
-
-								text = text + nextTileValue.uppercase;
-								i++
+								isCapsSingle = true
 							}
 						}
 					}
-					else
-					{
+					//else
+					//{
 
-						if (Boolean(isFlagSet)== false)
-						{
-							//text = text + bpCapital(currentTileValue);
-							text = text + currentTileValue.uppercase;
-						}
-					}
+					//	if (Boolean(isFlagSet)== false)
+				//		{
+				//			//text = text + bpCapital(currentTileValue);
+				//			text = text + currentTileValue.uppercase;
+				//		}
+				//	}
 				break;
 
 					
@@ -494,57 +493,37 @@ function processString(inputArray)
 				// dot 5 is also used to indicate a new line for large numbers
 				*/
 
-					//if (Boolean(isNumber)== false)
-					//{
-						if(nextTileValue !== undefined)
+					if(nextTileValue !== undefined)
+					{
+						
+							isNumber = true
+							isFlagSet = true
+							isCapsSingle = false
+							isCapsDouble = false
+						
+						//check if the next tile has a number value defined, if not unset the flag
+						if (nextTileValue.number == undefined)
 						{
-							//check for number identifier and set flag if true
-							//if(currentTileValue.id == "001111")
-							//{
-								isNumber = true
-								isFlagSet = true
-								isCaps = false
-								//i++
-							//}
-							//check if the next tile has a number value defined, if not unset the flag
-							if (nextTileValue.number == undefined)
-							{
-								isNumber = false
-								isFlagSet = false
-								i++
+							isNumber = false
+							isFlagSet = false
+							i++
 
-							}
 						}
+					}
 
-					//}
-					//else //if isNumber == true
-					//{	
-					//	isCaps = false;
-						/*
-						if (Boolean(isFlagSet)== false)
-						{
-							//text = text + bpCapital(currentTileValue);
-							text = text + currentTileValue.number;
-						}
-						*/
-
-						//look ahead to see if the next tile is a number terminator
-						
-						
-
-						
-					//}
+					
 				break;
 				
 
 				case "000000": //space
 				//space is used as a terminator for most indicators
 					//clear all flags
-					isCaps = false
+					isCapsSingle = false
+					isCapsDouble = false
 					isNumber = false
 					
-					text = text + " "
-					
+					text = buildString(text," ")
+										
 					isFlagSet = false
 				break;
 
@@ -558,11 +537,13 @@ function processString(inputArray)
 					//check for flags set above
 
 					//change into a function to process all the rules, not using if statements
-					if(Boolean(isCaps) == true)
+					if(Boolean(isCapsSingle) || Boolean(isCapsDouble)  == true)
 					{
 						//text = text + currentTileValue.uppercase;
 						text = buildString(text,currentTileValue.uppercase)
+						isCapsSingle = false
 					}
+
 					else if(isNumber == true)
 					{
 						if (currentTileValue.number !== undefined)

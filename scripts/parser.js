@@ -469,6 +469,7 @@ function processString(inputArray)
 							else
 							{
 								isCapsSingle = true
+								isNumber = false
 							}
 						}
 					}
